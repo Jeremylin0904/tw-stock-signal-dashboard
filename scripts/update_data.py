@@ -11,6 +11,7 @@ Data policy:
 from __future__ import annotations
 
 import datetime as dt
+import email.utils
 import json
 import math
 import os
@@ -129,7 +130,7 @@ def update_revenue(company: dict, token: str | None):
     company["revenue"].update({"period": ym, "value_twd": round(revenue, 0), "yoy": round(float(yoy), 2) if yoy is not None else None, "mom": round(float(mom), 2) if mom is not None else None, "source": "FinMind / company filings"})
 
 
-def google_news(company: dict, max_items=5):
+def google_news(company: dict, max_items=8):
     q = urllib.parse.quote_plus(f'{company["name"]} {company["id"]}')
     url = f"https://news.google.com/rss/search?q={q}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
     req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -142,13 +143,28 @@ def google_news(company: dict, max_items=5):
         source = item.find("source")
         source_text = source.text.strip() if source is not None and source.text else "Google News"
         link = (item.findtext("link") or "").strip()
+        published_at = pub
+        date = pub[:16]
         try:
-            date = dt.datetime.strptime(pub, "%a, %d %b %Y %H:%M:%S %Z").date().isoformat()
+            parsed = email.utils.parsedate_to_datetime(pub)
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=dt.timezone.utc)
+            local = parsed.astimezone(TZ)
+            published_at = local.strftime("%Y-%m-%d %H:%M")
+            date = local.date().isoformat()
         except Exception:
-            date = pub[:16]
-        out.append({"company": company["name"], "company_id": company["id"], "title": title, "date": date, "source": source_text, "url": link, "confidence": "secondary"})
+            pass
+        out.append({
+            "company": company["name"],
+            "company_id": company["id"],
+            "title": title,
+            "date": date,
+            "published_at": published_at,
+            "source": source_text,
+            "url": link,
+            "confidence": "secondary",
+        })
     return out
-
 
 def classify_news(items, signals):
     official = [x.lower() for x in signals["keywords"]["confirmed"]]
@@ -335,7 +351,9 @@ def main():
         broker_from_manual(data.setdefault("broker",{}))
 
     data["news"] = sorted(data.get("news",[]), key=lambda x:x.get("date",""), reverse=True)[:30]
-    data["generated_at"] = dt.datetime.now(TZ).strftime("%Y-%m-%d %H:%M")
+    now_text = dt.datetime.now(TZ).strftime("%Y-%m-%d %H:%M")
+    data["generated_at"] = now_text
+    data["news_updated_at"] = now_text
     data["mode"] = "自動更新" + ("＋分點Sponsor" if os.getenv("FINMIND_SPONSOR_TOKEN") else "（分點手動備援）")
     data["companies"]=[by_id[w["id"]] for w in watch.get("companies",[]) if w["id"] in by_id]
     save(DASHBOARD,data)
