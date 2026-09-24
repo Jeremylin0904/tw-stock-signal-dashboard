@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>台股驗證儀表板</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">TW STOCK SIGNAL DASHBOARD</div>
+        <h1>政美・由田・南亞｜基本面驗證 × 籌碼 × 估值</h1>
+      </div>
+      <div class="freshness" id="freshness">資料載入中…</div>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button data-tab="overview" class="active">總覽</button>
+      <button data-tab="7853">政美 7853</button>
+      <button data-tab="3455">由田 3455</button>
+      <button data-tab="1303">南亞 1303</button>
+      <button data-tab="broker">9887 分點</button>
+      <button data-tab="valuation">估值與訊號</button>
+    </nav>
+
+    <main id="app" class="content"></main>
+
+    <footer class="footer">
+      <span>用途：研究與決策輔助，不自動下單。</span>
+      <span>資料可信度：✅ 官方 / 🟦 次級來源 / ⚠️ 傳聞或待驗證</span>
+    </footer>
+  </div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
