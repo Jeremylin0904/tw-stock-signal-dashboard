@@ -11,6 +11,7 @@ import os
 import pathlib
 import urllib.parse
 import urllib.request
+import urllib.error
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DASHBOARD = ROOT / "site" / "data" / "dashboard.json"
@@ -18,13 +19,17 @@ UA = "Mozilla/5.0 (compatible; tw-stock-signal-dashboard/1.0)"
 TZ = dt.timezone(dt.timedelta(hours=8))
 
 def get_json(url, params, token):
-    params = {**params, "token": token}
     req = urllib.request.Request(
         url + "?" + urllib.parse.urlencode(params),
         headers={"User-Agent": UA, "Authorization": f"Bearer {token}"}
     )
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.loads(r.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        print(f"FinMind broker API error {e.code}: {body[:1000]}")
+        raise
 
 def main():
     token = os.getenv("FINMIND_SPONSOR_TOKEN")
