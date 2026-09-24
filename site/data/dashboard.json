@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24 15:31",
+  "generated_at": "2026-09-24 15:32",
   "mode": "自動更新（分點手動備援）",
   "companies": [
     {
@@ -1363,15 +1363,6 @@
       "confidence": "secondary"
     },
     {
-      "company": "政美應用",
-      "company_id": "7853",
-      "title": "7853 政美應用- 爆大量！ - 股市爆料同學會 - CMoney",
-      "date": "2026-09-14",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE13a0xDX0RSdERrcGg5dnVaZVlGdFp1WUx3V0UtUWRvekNGQ1U3TVZZdDRIcklOS2l0Y1MtSi0wOWdFbng2dkpjQ3NLdkRPUllNcmhqY3FuaG8?oc=5",
-      "confidence": "secondary"
-    },
-    {
       "company": "由田",
       "company_id": "3455",
       "title": "【11:24 即時新聞】由田(3455)股價上漲逾6%，受惠AI帶動PCB載板AOI裝置需求＋短線多頭格局延續惟上檔解套賣壓漸增 - CMoney投資網誌",
@@ -1423,6 +1414,15 @@
       "date": "2026-04-21",
       "source": "經濟日報",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBZcGxpNTdDX1lFZ3JFb1ZSbE5xSEpqWlNkTUpCNloxNy1COVNLeFFKZkc1MjZXZWVOaExIZHd1T2FxZzhaaXBrRWRDbUNqcjB1VE9TVkR6QVBaV1HSAWBBVV95cUxNN3F5VTRTMFh6aWVBb2lpajBDcDVaSnZ1ZVROZU5lLTlCbk00NlZBbU5oRzdNYURZYVZpUk0xSVU3VEU5b1hGbThBemlkTGxwVzhhRWJyUm9laFQ3Z2t0M0c?oc=5",
+      "confidence": "secondary"
+    },
+    {
+      "company": "政美應用",
+      "company_id": "7853",
+      "title": "【即時新聞】政美(7853)股價飆翻倍驚傳遭駭！外資逆勢卡位，後市還能追嗎？ - CMoney投資網誌",
+      "date": "2026-04-13",
+      "source": "CMoney投資網誌",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNR3piUVdBcmJjdnJNeFMtSEpoZVFPQW1RNWhubzAwaVJPdS1IT2pPalgybENSYW0yQkpfV0FmU0JEc0ZQSDcwQXRvTGdUV2hEQXlNckxBMFN6ZWVYMUxOUHd4SEtaZHBEdnJMS3VHN09hZ0poZXUtUXFrbzdpZnNfbjlxakg4Vjc0MTMzLWxFRUU?oc=5",
       "confidence": "secondary"
     },
     {
