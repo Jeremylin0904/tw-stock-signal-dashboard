@@ -57,13 +57,28 @@ def yahoo_history(symbol: str, days=90):
     payload = http_json(url, {"range": "3mo", "interval": "1d", "events": "div,splits"})
     result = payload["chart"]["result"][0]
     stamps = result.get("timestamp", [])
-    closes = result["indicators"]["quote"][0].get("close", [])
+    quote = result["indicators"]["quote"][0]
+    opens = quote.get("open", [])
+    highs = quote.get("high", [])
+    lows = quote.get("low", [])
+    closes = quote.get("close", [])
+    volumes = quote.get("volume", [])
     rows = []
-    for ts, close in zip(stamps, closes):
+    for i, ts in enumerate(stamps):
+        close = closes[i] if i < len(closes) else None
         if close is None:
             continue
+        def pick(arr):
+            return arr[i] if i < len(arr) and arr[i] is not None else None
         day = dt.datetime.fromtimestamp(ts, TZ).date().isoformat()
-        rows.append({"date": day, "close": round(float(close), 3)})
+        rows.append({
+            "date": day,
+            "open": round(float(pick(opens)), 3) if pick(opens) is not None else None,
+            "high": round(float(pick(highs)), 3) if pick(highs) is not None else None,
+            "low": round(float(pick(lows)), 3) if pick(lows) is not None else None,
+            "close": round(float(close), 3),
+            "volume": int(pick(volumes)) if pick(volumes) is not None else None,
+        })
     rows = rows[-days:]
     if not rows:
         raise RuntimeError("Yahoo returned no price rows")
@@ -71,7 +86,6 @@ def yahoo_history(symbol: str, days=90):
     prev = rows[-2]["close"] if len(rows) >= 2 else latest
     change = ((latest / prev) - 1) * 100 if prev else 0
     return latest, round(change, 3), rows
-
 
 def finmind(dataset: str, stock_id: str | None = None, start_date: str | None = None, token: str | None = None):
     params = {"dataset": dataset}
