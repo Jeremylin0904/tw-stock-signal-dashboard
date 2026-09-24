@@ -1,5 +1,5 @@
 name: Update dashboard data
-# Refresh trigger after broker API diagnostics
+# Broker data is optional: price/revenue/news still refresh if Sponsor access fails.
 
 on:
   workflow_dispatch:
@@ -31,9 +31,9 @@ jobs:
       - name: Update market / revenue / news
         env:
           FINMIND_TOKEN: ${{ secrets.FINMIND_TOKEN }}
-          FINMIND_SPONSOR_TOKEN: ${{ secrets.FINMIND_SPONSOR_TOKEN }}
         run: python scripts/update_data.py
       - name: Update 9887 broker branch
+        continue-on-error: true
         env:
           FINMIND_SPONSOR_TOKEN: ${{ secrets.FINMIND_SPONSOR_TOKEN }}
         run: python scripts/update_broker_agg.py
