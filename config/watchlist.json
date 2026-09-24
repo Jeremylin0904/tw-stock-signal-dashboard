@@ -1,0 +1,8 @@
+{
+  "companies": [
+    {"id": "7853", "name": "政美應用", "yahoo_symbol": "7853.TWO", "market": "emerging"},
+    {"id": "3455", "name": "由田", "yahoo_symbol": "3455.TWO", "market": "otc"},
+    {"id": "1303", "name": "南亞", "yahoo_symbol": "1303.TW", "market": "twse"}
+  ],
+  "broker": {"id": "9887", "name": "元大經紀"}
+}
