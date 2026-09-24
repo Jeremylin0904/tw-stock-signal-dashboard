@@ -17,9 +17,14 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   update:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,12 +44,19 @@ jobs:
         run: python scripts/update_broker_agg.py
       - name: Commit changed data
         run: |
-          if git diff --quiet -- site/data/dashboard.json; then
+          if ! git diff --quiet -- site/data/dashboard.json; then
+            git config user.name "stock-dashboard-bot"
+            git config user.email "stock-dashboard-bot@users.noreply.github.com"
+            git add site/data/dashboard.json
+            git commit -m "data: refresh dashboard"
+            git push
+          else
             echo "No data changes"
-            exit 0
           fi
-          git config user.name "stock-dashboard-bot"
-          git config user.email "stock-dashboard-bot@users.noreply.github.com"
-          git add site/data/dashboard.json
-          git commit -m "data: refresh dashboard"
-          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+      - name: Deploy refreshed dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
