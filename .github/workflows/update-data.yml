@@ -1,5 +1,5 @@
 name: Update dashboard data
-# Broker data is optional: price/revenue/news still refresh if Sponsor access fails.
+# Public broker summaries are always refreshed; Sponsor data, when available, upgrades the target to a fuller ledger.
 
 on:
   workflow_dispatch:
@@ -12,8 +12,8 @@ on:
   schedule:
     # Taiwan 14:40, after market close
     - cron: '40 6 * * 1-5'
-    # Taiwan 21:40, after FinMind branch data usually updates
-    - cron: '40 13 * * 1-5'
+    # Taiwan 23:10, after public broker summaries normally update
+    - cron: '10 15 * * 1-5'
 
 permissions:
   contents: write
@@ -31,28 +31,36 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Build baseline dashboard
         run: python scripts/seed_dashboard.py
+
       - name: Update market / revenue / news
         env:
           FINMIND_TOKEN: ${{ secrets.FINMIND_TOKEN }}
         run: python scripts/update_data.py
-      - name: Update 9887 broker branch
+
+      - name: Update public broker summaries
+        run: python scripts/update_public_broker.py
+
+      - name: Upgrade 9887 target with Sponsor data when available
         continue-on-error: true
         env:
           FINMIND_SPONSOR_TOKEN: ${{ secrets.FINMIND_SPONSOR_TOKEN }}
         run: python scripts/update_broker_agg.py
+
       - name: Commit changed data
         run: |
-          if ! git diff --quiet -- site/data/dashboard.json; then
+          if git diff --quiet -- site/data/dashboard.json site/data/public_broker_history.json; then
+            echo "No data changes"
+          else
             git config user.name "stock-dashboard-bot"
             git config user.email "stock-dashboard-bot@users.noreply.github.com"
-            git add site/data/dashboard.json
+            git add site/data/dashboard.json site/data/public_broker_history.json
             git commit -m "data: refresh dashboard"
             git push
-          else
-            echo "No data changes"
           fi
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
