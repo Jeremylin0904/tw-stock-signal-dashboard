@@ -55,6 +55,14 @@ def entries(segment: str, side: str):
             out.append({"name":clean,"net":num(n)*(1 if side=="買超" else -1),"share_pct":float(share) if share else None})
     return out
 
+def long_entries(segment: str):
+    out=[]
+    for part in re.split(r"[、；]",segment):
+        m=re.search(r"(.+?)（(?:買超\s*)?([\d,]+)\s*張(?:，[^）]*)?）",part.strip())
+        if m:
+            out.append({"name":m.group(1).strip(),"net":num(m.group(2))})
+    return out
+
 def find_branch(items, branch_id):
     for rank,x in enumerate(items,1):
         if branch_id in x["name"]:
@@ -87,7 +95,7 @@ def parse_page(text: str, branch_id: str):
     lm=re.search(r"拉長到近\s*(\d+)\s*個交易日，買超最多的是(.*?)(?:。|\d{1,2}/\d{1,2}\s*當天)",text)
     if lm:
         long_days=int(lm.group(1))
-        long_buyers=entries(lm.group(2),"買超")
+        long_buyers=long_entries(lm.group(2))
         long_branch=find_branch(long_buyers,branch_id)
 
     cr=re.search(r"最新交易日\s*CR15\s*集中度\s*\|?\s*([\d.]+)",text)
