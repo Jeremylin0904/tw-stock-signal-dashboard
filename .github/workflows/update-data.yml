@@ -1,4 +1,5 @@
 name: Update dashboard data
+# Refresh trigger after broker API diagnostics
 
 on:
   workflow_dispatch:
