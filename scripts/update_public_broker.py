@@ -83,12 +83,12 @@ def parse_page(text: str, branch_id: str):
 
     branch=find_branch(buyers,branch_id) or find_branch(sellers,branch_id)
 
-    long_days=None; long_branch=None
+    long_days=None; long_branch=None; long_buyers=[]
     lm=re.search(r"拉長到近\s*(\d+)\s*個交易日，買超最多的是(.*?)(?:。|\d{1,2}/\d{1,2}\s*當天)",text)
     if lm:
         long_days=int(lm.group(1))
-        long_items=entries(lm.group(2),"買超")
-        long_branch=find_branch(long_items,branch_id)
+        long_buyers=entries(lm.group(2),"買超")
+        long_branch=find_branch(long_buyers,branch_id)
 
     cr=re.search(r"最新交易日\s*CR15\s*集中度\s*\|?\s*([\d.]+)",text)
     if not cr:
@@ -107,6 +107,7 @@ def parse_page(text: str, branch_id: str):
         "branch":branch,
         "long_window_days":long_days,
         "long_branch":long_branch,
+        "long_buyers":long_buyers,
         "cr15_latest":float(cr.group(1)) if cr else None,
         "cr15_avg":float(avg.group(2)) if avg else None,
         "branches_count":int(count.group(1).replace(",","")) if count else None,
@@ -194,6 +195,29 @@ def main():
             "cr15_latest":p.get("cr15_latest"),
             "source_date":p.get("source_date"),
         })
+
+    company_by_id={x["id"]:x for x in data.get("companies",[])}
+    company_names={x["id"]:x["name"] for x in cfg.get("companies",[])}
+    for sid,name in company_names.items():
+        p=parsed.get(sid)
+        comp=company_by_id.get(sid)
+        if not p or not comp:
+            continue
+        comp["chips"]={
+            "source":"Signova 公開分點摘要",
+            "source_url":f"https://signova.tw/stock/{sid}",
+            "as_of":p.get("source_date") or "—",
+            "window_days":p.get("window_days"),
+            "range_label":p.get("range_label"),
+            "top_buyers":p.get("top_buyers",[])[:3],
+            "top_sellers":p.get("top_sellers",[])[:3],
+            "long_window_days":p.get("long_window_days"),
+            "long_buyers":p.get("long_buyers",[])[:3],
+            "cr15_latest":p.get("cr15_latest"),
+            "cr15_avg":p.get("cr15_avg"),
+            "branches_count":p.get("branches_count"),
+            "note":"Top 3 排名來自公開頁摘要，不是完整券商帳本；同一分點不等於同一投資人。"
+        }
 
     b=data.setdefault("broker",{})
     # Keep any genuine daily ledger in history; public source does not provide it.
