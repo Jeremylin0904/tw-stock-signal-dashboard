@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24 15:34",
+  "generated_at": "2026-09-24 15:44",
   "mode": "自動更新（分點手動備援）",
   "companies": [
     {
@@ -1216,14 +1216,21 @@
   "broker": {
     "branch_id": "9887",
     "branch_name": "元大經紀",
-    "source": "manual fallback",
+    "source": "Signova 公開分點摘要",
     "target": {
       "stock_id": "7853",
       "as_of": "2026-09-23",
       "net_5d": 160.0,
-      "net_20d": 160.0,
-      "pattern": "建倉觀察",
-      "pattern_note": "手動備援資料；有 Sponsor token 時會改用自動分點資料。",
+      "short_window_days": 5,
+      "net_20d": 156.0,
+      "long_window_days": 12,
+      "rank": 1,
+      "share_pct": 4.04,
+      "cr15_latest": 0.44,
+      "cr15_avg": 0.43,
+      "branches_count": 358,
+      "pattern": "持續累積",
+      "pattern_note": "公開頁僅提供 Top 3 摘要；9887 若未進 Top 3，不代表當日/區間沒有交易。",
       "history": [
         {
           "date": "2026-09-17",
@@ -1265,38 +1272,70 @@
           "volume_share_pct": 4.0,
           "cum": 160.0
         }
+      ],
+      "summary_history": [
+        {
+          "observed_at": "2026-09-24 15:44",
+          "source_date": "2026-09-23",
+          "stock_id": "7853",
+          "window_days": 5,
+          "net": 160.0,
+          "rank": 1,
+          "share_pct": 4.04,
+          "long_window_days": 12,
+          "long_net": 156.0,
+          "long_rank": 1,
+          "cr15_latest": 0.44,
+          "cr15_avg": 0.43,
+          "branches_count": 358
+        }
       ]
     },
     "cross_stock": [
       {
         "id": "7853",
         "name": "政美應用",
-        "net_5d": 160,
-        "net_20d": 156,
+        "net_5d": 160.0,
+        "short_window_days": 5,
+        "net_20d": 156.0,
+        "long_window_days": 12,
         "share_pct": 4.04,
-        "estimated_value_m": 57.0,
-        "pattern": "近期集中累積"
+        "estimated_value_m": null,
+        "pattern": "持續累積",
+        "rank": 1,
+        "cr15_latest": 0.44,
+        "source_date": "2026-09-23"
       },
       {
         "id": "4573",
         "name": "高明鐵",
-        "net_5d": 153,
-        "net_20d": 226,
+        "net_5d": 153.0,
+        "short_window_days": 5,
+        "net_20d": null,
+        "long_window_days": 20,
         "share_pct": 2.59,
-        "estimated_value_m": 100.0,
-        "pattern": "波段累積"
+        "estimated_value_m": null,
+        "pattern": "近期買超",
+        "rank": 1,
+        "cr15_latest": 0.27,
+        "source_date": "2026-09-23"
       },
       {
         "id": "7686",
         "name": "捷立康",
-        "net_5d": 61,
+        "net_5d": 61.0,
+        "short_window_days": 5,
         "net_20d": null,
+        "long_window_days": 16,
         "share_pct": 4.58,
-        "estimated_value_m": 47.0,
-        "pattern": "近期買超"
+        "estimated_value_m": null,
+        "pattern": "近期買超",
+        "rank": 1,
+        "cr15_latest": 0.75,
+        "source_date": "2026-09-23"
       }
     ],
-    "data_note": "分點資料只代表該券商營業據點的客戶交易彙總，不代表單一大戶。自動逐分點資料需要 FinMind Sponsor 方案；未設定時使用 manual_broker.json。"
+    "data_note": "來源為 Signova 公開個股頁的分點籌碼摘要；其排名只統計公開頁呈現的 Top 3/上榜資訊，不是完整券商帳本。CR15 的母體與 Top 分點排名不同。同一分點也不代表單一投資人。"
   },
   "news": [
     {
