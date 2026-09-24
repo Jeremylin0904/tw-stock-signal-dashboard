@@ -9,6 +9,15 @@ const esc = (s='') => String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;
 function badge(text, tone='blue') { return `<span class="badge ${tone}">${esc(text)}</span>`; }
 function sourceBadge(level) { return level === 'official' ? badge('✅ 官方','good') : level === 'rumor' ? badge('⚠️ 待驗證','warn') : badge('🟦 次級來源','blue'); }
 
+function actionZh(action='') {
+  return ({
+    'ADD':'加碼觀察',
+    'HOLD':'續抱觀察',
+    'TRIM':'減碼',
+    'EXIT REVIEW':'重新檢視／退出'
+  })[action] || action;
+}
+
 function safeUrl(url='') {
   try { const u=new URL(url); return ['http:','https:'].includes(u.protocol)?u.href:''; } catch { return ''; }
 }
@@ -26,67 +35,99 @@ function sparkline(history=[]) {
   const rows=(history||[]).filter(x=>Number.isFinite(Number(x.close))).map((x,i,a)=>{
     const close=Number(x.close);
     const prev=i>0?Number(a[i-1].close):null;
-    return {...x, close, day_pct:prev?((close/prev)-1)*100:null};
+    const open=Number.isFinite(Number(x.open))?Number(x.open):close;
+    const high=Number.isFinite(Number(x.high))?Number(x.high):Math.max(open,close);
+    const low=Number.isFinite(Number(x.low))?Number(x.low):Math.min(open,close);
+    return {...x,open,high,low,close,day_pct:prev?((close/prev)-1)*100:null};
   });
   if (rows.length < 2) return '<div class="price-chart"></div>';
 
-  const w=420,h=132,left=6,right=8,top=8,priceBottom=91,volTop=101,volBottom=124;
-  const closes=rows.map(x=>x.close);
-  const rawMin=Math.min(...closes), rawMax=Math.max(...closes), rawRange=Math.max(1,rawMax-rawMin);
-  const min=rawMin-rawRange*.08, max=rawMax+rawRange*.08, range=Math.max(1,max-min);
+  const w=560,h=232,left=48,right=54,top=16,priceBottom=162,volTop=180,volBottom=216;
+  const rawMin=Math.min(...rows.map(x=>x.low));
+  const rawMax=Math.max(...rows.map(x=>x.high));
+  const rawRange=Math.max(1,rawMax-rawMin);
+  const min=rawMin-rawRange*.06, max=rawMax+rawRange*.06, range=Math.max(1,max-min);
   const maxVol=Math.max(1,...rows.map(x=>Number(x.volume)||0));
   const xAt=i=>left+(w-left-right)*i/(rows.length-1);
   const yAt=v=>top+(priceBottom-top)*(1-(v-min)/range);
-
-  const ma=rows.map((x,i)=>{
-    if(i<19) return null;
-    const avg=rows.slice(i-19,i+1).reduce((s,r)=>s+r.close,0)/20;
-    return avg;
-  });
-
-  const points=rows.map((x,i)=>({...x,sx:xAt(i),sy:yAt(x.close),ma20:ma[i]}));
-  const closePts=points.map(x=>`${x.sx},${x.sy}`).join(' ');
-  const area=`${left},${priceBottom} ${closePts} ${w-right},${priceBottom}`;
-  const maPts=points.filter(x=>x.ma20!=null).map(x=>`${x.sx},${yAt(x.ma20)}`).join(' ');
+  const vAt=v=>volBottom-(volBottom-volTop)*(v/maxVol);
   const step=(w-left-right)/Math.max(1,rows.length-1);
-  const barW=Math.max(1.2,Math.min(5,step*.62));
+  const bodyW=Math.max(2.2,Math.min(7,step*.62));
 
-  const grid=[.25,.5,.75].map(t=>{
-    const y=top+(priceBottom-top)*t;
-    return `<line class="chart-gridline" x1="${left}" x2="${w-right}" y1="${y}" y2="${y}"></line>`;
+  const ma=rows.map((x,i)=> i<19 ? null : rows.slice(i-19,i+1).reduce((s,r)=>s+r.close,0)/20);
+  const points=rows.map((x,i)=>({...x,sx:xAt(i),sy:yAt(x.close),ma20:ma[i]}));
+
+  const priceTicks=[0,1,2,3,4].map(i=>{
+    const value=max-(range*i/4);
+    const y=yAt(value);
+    return `<g class="axis-tick price-tick">
+      <line x1="${left}" x2="${w-right}" y1="${y}" y2="${y}" class="chart-gridline"></line>
+      <text x="${w-4}" y="${y+3}" text-anchor="end">${fmt(value,1)}</text>
+    </g>`;
+  }).join('');
+
+  const volTicks=[0,.5,1].map(t=>{
+    const value=maxVol*t;
+    const y=vAt(value);
+    const lots=value/1000;
+    const label=lots>=1000 ? `${fmt(lots/1000,1)}K張` : `${fmt(lots,0)}張`;
+    return `<g class="axis-tick volume-tick">
+      <line x1="${left}" x2="${w-right}" y1="${y}" y2="${y}" class="volume-gridline"></line>
+      <text x="4" y="${y+3}" text-anchor="start">${label}</text>
+    </g>`;
+  }).join('');
+
+  const candles=points.map(x=>{
+    const up=x.close>=x.open;
+    const topY=yAt(Math.max(x.open,x.close));
+    const bottomY=yAt(Math.min(x.open,x.close));
+    const bodyH=Math.max(1.2,bottomY-topY);
+    const klass=up?'candle-up':'candle-down';
+    return `<g class="candle ${klass}">
+      <line class="wick" x1="${x.sx}" x2="${x.sx}" y1="${yAt(x.high)}" y2="${yAt(x.low)}"></line>
+      <rect class="body" x="${x.sx-bodyW/2}" y="${topY}" width="${bodyW}" height="${bodyH}" rx=".5"></rect>
+    </g>`;
   }).join('');
 
   const volumes=points.map(x=>{
-    const v=Number(x.volume)||0;
-    const bh=(volBottom-volTop)*(v/maxVol);
-    return `<rect class="volume-bar" x="${x.sx-barW/2}" y="${volBottom-bh}" width="${barW}" height="${Math.max(.8,bh)}" rx=".7"></rect>`;
+    const v=Number(x.volume)||0, y=vAt(v);
+    const klass=x.close>=x.open?'vol-up':'vol-down';
+    return `<rect class="volume-candle ${klass}" x="${x.sx-bodyW/2}" y="${y}" width="${bodyW}" height="${Math.max(.8,volBottom-y)}" rx=".5"></rect>`;
   }).join('');
 
+  const maPts=points.filter(x=>x.ma20!=null).map(x=>`${x.sx},${yAt(x.ma20)}`).join(' ');
   const latest=points[points.length-1];
+  const rangePct=((latest.close/rows[0].close)-1)*100;
+
   const zones=points.map((x,i)=>{
-    const zx=Math.max(0,x.sx-step/2), zw=Math.min(w,zx+step)-zx;
+    const zx=Math.max(left,x.sx-step/2), zw=Math.min(w-right,zx+step)-zx;
     const meta=encodeURIComponent(JSON.stringify({
       date:x.date,close:x.close,open:x.open,high:x.high,low:x.low,volume:x.volume,
       day_pct:x.day_pct,ma20:x.ma20
     }));
-    return `<rect class="chart-zone" x="${zx}" y="0" width="${Math.max(6,zw)}" height="${h}" data-x="${x.sx}" data-y="${x.sy}" data-meta="${meta}"></rect>`;
+    return `<rect class="chart-zone" x="${zx}" y="${top}" width="${Math.max(5,zw)}" height="${volBottom-top}" data-x="${x.sx}" data-y="${x.sy}" data-meta="${meta}"></rect>`;
   }).join('');
 
-  const rangePct=((latest.close/rows[0].close)-1)*100;
   return `<div class="price-chart">
     <div class="chart-header">
-      <div class="chart-legend"><span class="legend-close"></span>收盤 <span class="legend-ma"></span>MA20 <span class="chart-period">3M</span></div>
-      <div class="chart-stats"><span class="${cls(rangePct)}">${pct(rangePct)}</span><span>H ${fmt(rawMax,1)} · L ${fmt(rawMin,1)}</span></div>
+      <div class="chart-legend">
+        <span class="legend-candle up"></span>上漲
+        <span class="legend-candle down"></span>下跌
+        <span class="legend-ma"></span>MA20
+        <span class="chart-period">3M</span>
+      </div>
+      <div class="chart-stats"><span class="${cls(rangePct)}">${pct(rangePct)}</span><span>高 ${fmt(rawMax,1)} · 低 ${fmt(rawMin,1)}</span></div>
     </div>
-    <div class="chart-canvas">
-      <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-label="近三個月股價與成交量">
-        ${grid}
-        <polygon class="price-area" points="${area}"></polygon>
+    <div class="chart-canvas candle-canvas">
+      <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" aria-label="近三個月K線與成交量">
+        <text class="axis-title price-axis-title" x="${w-4}" y="10" text-anchor="end">股價</text>
+        <text class="axis-title volume-axis-title" x="4" y="${volTop-5}" text-anchor="start">成交量</text>
+        ${priceTicks}
+        ${volTicks}
         ${volumes}
+        ${candles}
         <polyline class="ma-line" points="${maPts}"></polyline>
-        <polyline class="price-line" points="${closePts}"></polyline>
         <line class="latest-line" x1="${left}" x2="${w-right}" y1="${latest.sy}" y2="${latest.sy}"></line>
-        <circle class="latest-dot" cx="${latest.sx}" cy="${latest.sy}" r="3.2"></circle>
         <line class="chart-guide-x" x1="0" x2="0" y1="${top}" y2="${volBottom}"></line>
         <line class="chart-guide-y" x1="${left}" x2="${w-right}" y1="0" y2="0"></line>
         <circle class="chart-focus" cx="0" cy="0" r="3.8"></circle>
@@ -94,7 +135,7 @@ function sparkline(history=[]) {
       </svg>
       <div class="chart-tooltip" role="status"></div>
     </div>
-    <div class="chart-footer"><span>${esc(rows[0].date)}</span><span>Volume</span><span>${esc(latest.date)}</span></div>
+    <div class="chart-footer"><span>${esc(rows[0].date)}</span><span>K線 · 成交量</span><span>${esc(latest.date)}</span></div>
   </div>`;
 }
 
@@ -117,14 +158,15 @@ function bindSparkTooltips() {
         guideY.setAttribute('y1',y); guideY.setAttribute('y2',y);
         guideX.classList.add('show'); guideY.classList.add('show');
         focus.setAttribute('cx',x); focus.setAttribute('cy',y); focus.classList.add('show');
-        const vol=m.volume==null?'—':Number(m.volume).toLocaleString('zh-TW');
+        const lots=m.volume==null?'—':fmt(Number(m.volume)/1000,0)+' 張';
         const ma=m.ma20==null?'—':fmt(m.ma20,1);
         tip.innerHTML=`<strong>${esc(m.date||'')}</strong>
-          <span>收 <b>${fmt(m.close,1)}</b> · <b class="${cls(m.day_pct)}">${pct(m.day_pct)}</b></span>
-          <span>開 ${fmt(m.open,1)}　高 ${fmt(m.high,1)}　低 ${fmt(m.low,1)}</span>
-          <span>MA20 ${ma}　量 ${vol}</span>`;
+          <span>開 ${fmt(m.open,1)}　高 ${fmt(m.high,1)}</span>
+          <span>低 ${fmt(m.low,1)}　收 <b>${fmt(m.close,1)}</b></span>
+          <span>漲跌 <b class="${cls(m.day_pct)}">${pct(m.day_pct)}</b>　MA20 ${ma}</span>
+          <span>成交量 ${lots}</span>`;
         tip.style.left=`${Math.min(84,Math.max(16,left))}%`;
-        tip.style.top=`${Math.max(8,top-8)}%`;
+        tip.style.top=`${Math.max(10,top-7)}%`;
         tip.classList.add('show');
       }
       function hide(){
@@ -146,7 +188,7 @@ function companyCard(c) {
     <div class="status-row">
       ${badge(c.valuation.label, c.valuation.tone)}
       ${badge(c.fundamental.label, c.fundamental.tone)}
-      ${badge(c.decision.action, actionTone)}
+      ${badge(actionZh(c.decision.action), actionTone)}
     </div>
     <div class="metric-grid">
       <div class="metric"><div class="metric-label">合理價 Base</div><div class="metric-value">${fmt(c.valuation.base_fair,0)}</div></div>
@@ -221,11 +263,11 @@ function companyPage(id) {
       <section class="card">
         <div class="company-head"><div><h2>${c.name} ${c.id}</h2><div class="ticker">${c.role}</div></div><div><div class="price">${fmt(c.market.price,1)}</div><div class="delta ${cls(c.market.change_pct)}">${pct(c.market.change_pct)}</div></div></div>
         ${sparkline(c.market.history)}
-        <div class="status-row">${badge(c.valuation.label,c.valuation.tone)} ${badge(c.fundamental.label,c.fundamental.tone)} ${badge(c.decision.action,actionTone)}</div>
+        <div class="status-row">${badge(c.valuation.label,c.valuation.tone)} ${badge(c.fundamental.label,c.fundamental.tone)} ${badge(actionZh(c.decision.action),actionTone)}</div>
       </section>
       <section class="action-box">
         <div class="metric-label">目前操作判斷</div>
-        <div class="action ${actionTone==='good'?'positive':actionTone==='bad'?'negative':''}">${c.decision.action}</div>
+        <div class="action ${actionTone==='good'?'positive':actionTone==='bad'?'negative':''}">${actionZh(c.decision.action)}</div>
         <p>${esc(c.decision.reason)}</p>
         <p><strong>改變判斷的條件：</strong>${esc(c.decision.change_condition)}</p>
       </section>
@@ -281,12 +323,12 @@ function valuationPage() {
     <section class="card">
       <h2>三檔估值總表</h2>
       <div class="table-wrap" style="margin-top:12px"><table><thead><tr><th>公司</th><th>現價</th><th>Bear</th><th>Base</th><th>Bull</th><th>距 Base</th><th>操作</th></tr></thead><tbody>
-        ${state.data.companies.map(c=>`<tr><td>${c.name} ${c.id}</td><td>${fmt(c.market.price,1)}</td><td>${fmt(c.valuation.scenarios.bear.fair_value,0)}</td><td>${fmt(c.valuation.scenarios.base.fair_value,0)}</td><td>${fmt(c.valuation.scenarios.bull.fair_value,0)}</td><td class="${cls(c.valuation.base_upside_pct)}">${pct(c.valuation.base_upside_pct)}</td><td>${c.decision.action}</td></tr>`).join('')}
+        ${state.data.companies.map(c=>`<tr><td>${c.name} ${c.id}</td><td>${fmt(c.market.price,1)}</td><td>${fmt(c.valuation.scenarios.bear.fair_value,0)}</td><td>${fmt(c.valuation.scenarios.base.fair_value,0)}</td><td>${fmt(c.valuation.scenarios.bull.fair_value,0)}</td><td class="${cls(c.valuation.base_upside_pct)}">${pct(c.valuation.base_upside_pct)}</td><td>${actionZh(c.decision.action)}</td></tr>`).join('')}
       </tbody></table></div>
     </section>
     <div class="section-title"><h2>決策規則</h2></div>
     <div class="grid grid-2">
-      <section class="card"><h3>價格規則</h3><ul class="list"><li><div class="title">ADD：價格低於 Base fair value 約 15% 以上，且基本面沒有紅旗。</div></li><li><div class="title">HOLD：價格落在 Base 附近，等待下一個基本面驗證。</div></li><li><div class="title">TRIM：價格高於 Base 約 15% 以上，但新資訊沒有同步上修合理價。</div></li><li><div class="title">EXIT REVIEW：基本面出現兩項以上重大紅旗，不因股價便宜自動加碼。</div></li></ul></section>
+      <section class="card"><h3>價格規則</h3><ul class="list"><li><div class="title">加碼觀察：價格低於 Base fair value 約 15% 以上，且基本面沒有紅旗。</div></li><li><div class="title">續抱觀察：價格落在 Base 附近，等待下一個基本面驗證。</div></li><li><div class="title">減碼：價格高於 Base 約 15% 以上，但新資訊沒有同步上修合理價。</div></li><li><div class="title">重新檢視／退出：基本面出現兩項以上重大紅旗，不因股價便宜自動加碼。</div></li></ul></section>
       <section class="card"><h3>重要原則</h3><ul class="list"><li><div class="title">政美：未證實的台積電量產訂單不納入 Base case。</div></li><li><div class="title">由田：14.6535 億採購額不直接等於同期營收。</div></li><li><div class="title">南亞：拆分本業 EPS 與南亞科／南電／台塑石化等轉投資貢獻。</div></li></ul></section>
     </div>`;
 }
