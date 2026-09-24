@@ -93,17 +93,22 @@ function companyPage(id) {
 
 function brokerPage() {
   const b=state.data.broker;
+  const t=b.target||{};
+  const shortDays=t.short_window_days||5;
+  const longDays=t.long_window_days||20;
+  const snaps=t.summary_history||[];
+  const signed=(n)=> n==null?'—':`${n>=0?'+':''}${fmt(n,0)}`;
   return `
     <div class="grid grid-4">
       <div class="card kpi"><div class="metric-label">分點</div><div class="big">${esc(b.branch_name)}</div><div class="small">代碼 ${b.branch_id}；同一分點不代表同一投資人。</div></div>
-      <div class="card kpi"><div class="metric-label">政美近5日</div><div class="big ${cls(b.target.net_5d)}">${b.target.net_5d>=0?'+':''}${fmt(b.target.net_5d,0)} 張</div><div class="small">資料日 ${b.target.as_of}</div></div>
-      <div class="card kpi"><div class="metric-label">政美近20日</div><div class="big ${cls(b.target.net_20d)}">${b.target.net_20d>=0?'+':''}${fmt(b.target.net_20d,0)} 張</div><div class="small">觀察是否持續累積或反轉。</div></div>
-      <div class="card kpi"><div class="metric-label">型態判斷</div><div class="big">${esc(b.target.pattern)}</div><div class="small">${esc(b.target.pattern_note)}</div></div>
+      <div class="card kpi"><div class="metric-label">政美近${shortDays}日</div><div class="big ${cls(t.net_5d)}">${signed(t.net_5d)} 張</div><div class="small">Top 3 排名 ${t.rank||'—'}；占區間成交量 ${t.share_pct==null?'—':fmt(t.share_pct,2)+'%'}</div></div>
+      <div class="card kpi"><div class="metric-label">政美近${longDays}日</div><div class="big ${cls(t.net_20d)}">${signed(t.net_20d)} 張</div><div class="small">來源實際提供幾日，就顯示幾日，不硬補成20日。</div></div>
+      <div class="card kpi"><div class="metric-label">CR15 / 型態</div><div class="big">${t.cr15_latest==null?'—':fmt(t.cr15_latest,2)}</div><div class="small">${esc(t.pattern)} · 資料日 ${t.as_of||'—'}</div></div>
     </div>
-    <div class="section-title"><h2>政美 9887 累積</h2><div class="hint">若有 Sponsor API Token，GitHub Action 可自動更新</div></div>
-    <section class="card"><div class="table-wrap"><table><thead><tr><th>日期</th><th>收盤</th><th>單日淨買賣</th><th>累積</th><th>占成交量</th></tr></thead><tbody>${b.target.history.map(r=>`<tr><td>${r.date}</td><td>${fmt(r.close,1)}</td><td class="${cls(r.net)}">${r.net>=0?'+':''}${fmt(r.net,0)}</td><td class="${cls(r.cum)}">${r.cum>=0?'+':''}${fmt(r.cum,0)}</td><td>${fmt(r.volume_share_pct,1)}%</td></tr>`).join('')}</tbody></table></div></section>
-    <div class="section-title"><h2>9887 跨股票雷達</h2></div>
-    <section class="card"><div class="table-wrap"><table><thead><tr><th>股票</th><th>近5日</th><th>近20日</th><th>占5日成交量</th><th>估計金額</th><th>型態</th></tr></thead><tbody>${b.cross_stock.map(r=>`<tr><td>${esc(r.name)} ${r.id}</td><td class="${cls(r.net_5d)}">${r.net_5d>=0?'+':''}${fmt(r.net_5d,0)}</td><td class="${cls(r.net_20d)}">${r.net_20d>=0?'+':''}${fmt(r.net_20d,0)}</td><td>${fmt(r.share_pct,1)}%</td><td>${r.estimated_value_m==null?'—':fmt(r.estimated_value_m,1)+' M'}</td><td>${esc(r.pattern)}</td></tr>`).join('')}</tbody></table></div></section>
+    <div class="section-title"><h2>政美 9887 公開摘要歷史</h2><div class="hint">${esc(b.source||'公開分點摘要')}；每天晚間更新後記錄一筆</div></div>
+    <section class="card"><div class="table-wrap"><table><thead><tr><th>資料日</th><th>短區間</th><th>9887淨買賣</th><th>排名</th><th>占成交量</th><th>長區間</th><th>長區間淨買賣</th><th>CR15</th><th>分點數</th></tr></thead><tbody>${snaps.length?snaps.slice().reverse().map(r=>`<tr><td>${r.source_date||'—'}</td><td>近${r.window_days||'—'}日</td><td class="${cls(r.net)}">${signed(r.net)}</td><td>${r.rank||'—'}</td><td>${r.share_pct==null?'—':fmt(r.share_pct,2)+'%'}</td><td>${r.long_window_days?'近'+r.long_window_days+'日':'—'}</td><td class="${cls(r.long_net)}">${signed(r.long_net)}</td><td>${r.cr15_latest==null?'—':fmt(r.cr15_latest,2)}</td><td>${r.branches_count==null?'—':fmt(r.branches_count,0)}</td></tr>`).join(''):'<tr><td colspan="9">尚未累積公開摘要歷史。</td></tr>'}</tbody></table></div></section>
+    <div class="section-title"><h2>9887 跨股票雷達</h2><div class="hint">目前掃描 config/public_broker_watchlist.json 內的股票</div></div>
+    <section class="card"><div class="table-wrap"><table><thead><tr><th>股票</th><th>短區間</th><th>排名</th><th>短區間淨買賣</th><th>占成交量</th><th>長區間</th><th>長區間淨買賣</th><th>CR15</th><th>型態</th></tr></thead><tbody>${(b.cross_stock||[]).map(r=>`<tr><td>${esc(r.name)} ${r.id}</td><td>近${r.short_window_days||'—'}日</td><td>${r.rank||'—'}</td><td class="${cls(r.net_5d)}">${signed(r.net_5d)}</td><td>${r.share_pct==null?'—':fmt(r.share_pct,2)+'%'}</td><td>${r.long_window_days?'近'+r.long_window_days+'日':'—'}</td><td class="${cls(r.net_20d)}">${signed(r.net_20d)}</td><td>${r.cr15_latest==null?'—':fmt(r.cr15_latest,2)}</td><td>${esc(r.pattern)}</td></tr>`).join('')}</tbody></table></div></section>
     <div class="section-title"><h2>資料限制</h2></div>
     <div class="callout">${esc(b.data_note)}</div>`;
 }
