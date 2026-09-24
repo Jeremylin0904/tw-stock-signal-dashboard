@@ -1,0 +1,11 @@
+{
+  "decision": {
+    "add_below_base_pct": -15,
+    "trim_above_base_pct": 15,
+    "exit_review_red_flags": 2
+  },
+  "keywords": {
+    "confirmed": ["重大訊息", "公告", "量產", "取得機器設備", "追加訂單", "認證完成", "通過認證", "repeat order"],
+    "rumor": ["傳出", "傳聞", "市場傳", "據悉", "法人圈", "可望拿下", "有望取得"]
+  }
+}
