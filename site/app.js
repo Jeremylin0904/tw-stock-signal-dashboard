@@ -169,6 +169,50 @@ function overview() {
     <section class="card"><ul class="list">${d.news.slice(0,12).map(n=>newsLink(n,true)).join('')}</ul></section>`;
 }
 
+function chipSection(c) {
+  const ch=c.chips;
+  if(!ch) {
+    return `<div class="section-title"><h2>籌碼・分點</h2><div class="hint">等待盤後分點摘要更新</div></div>
+      <section class="card"><div class="callout">目前尚未取得這檔股票的公開分點摘要；資料通常在交易日晚間更新。</div></section>`;
+  }
+  const signed=n=>n==null?'—':`${n>=0?'+':''}${fmt(n,0)} 張`;
+  const buyer0=ch.top_buyers?.[0];
+  const seller0=ch.top_sellers?.[0];
+  const source=safeUrl(ch.source_url||'');
+  const branchRows=(items,side)=> (items||[]).map((r,i)=>`<div class="chip-row">
+    <div class="chip-rank">${i+1}</div>
+    <div class="chip-name">${esc(r.name)}</div>
+    <div class="chip-net ${cls(r.net)}">${signed(r.net)}</div>
+    <div class="chip-share">${r.share_pct==null?'—':fmt(r.share_pct,2)+'%'}</div>
+  </div>`).join('');
+  return `
+    <div class="section-title"><h2>籌碼・分點</h2><div class="hint">資料日 ${esc(ch.as_of||'—')} · ${source?`<a class="inline-source" href="${esc(source)}" target="_blank" rel="noopener noreferrer">公開來源 ↗</a>`:esc(ch.source||'')}</div></div>
+    <div class="grid grid-4">
+      <div class="card kpi"><div class="metric-label">近${ch.window_days||'—'}日最大買方</div><div class="big chip-big positive">${buyer0?esc(buyer0.name):'—'}</div><div class="small">${buyer0?signed(buyer0.net):'—'}${buyer0?.share_pct!=null?` · 占成交量 ${fmt(buyer0.share_pct,2)}%`:''}</div></div>
+      <div class="card kpi"><div class="metric-label">近${ch.window_days||'—'}日最大賣方</div><div class="big chip-big negative">${seller0?esc(seller0.name):'—'}</div><div class="small">${seller0?signed(seller0.net):'—'}${seller0?.share_pct!=null?` · 占成交量 ${fmt(Math.abs(seller0.share_pct),2)}%`:''}</div></div>
+      <div class="card kpi"><div class="metric-label">最新 CR15</div><div class="big">${ch.cr15_latest==null?'—':fmt(ch.cr15_latest,2)}</div><div class="small">近${ch.window_days||'—'}日平均 ${ch.cr15_avg==null?'—':fmt(ch.cr15_avg,2)}；值域 0–2</div></div>
+      <div class="card kpi"><div class="metric-label">進出分點數</div><div class="big">${ch.branches_count==null?'—':fmt(ch.branches_count,0)}</div><div class="small">分點越多，通常代表參與來源越分散。</div></div>
+    </div>
+
+    <div class="grid grid-2 chip-columns">
+      <section class="card chip-card">
+        <div class="chip-card-head"><h3>近${ch.window_days||'—'}日買超 Top 3</h3><span>淨買超 / 區間成交占比</span></div>
+        <div class="chip-table">${branchRows(ch.top_buyers,'buy') || '<div class="chip-empty">暫無資料</div>'}</div>
+      </section>
+      <section class="card chip-card">
+        <div class="chip-card-head"><h3>近${ch.window_days||'—'}日賣超 Top 3</h3><span>淨賣超 / 區間成交占比</span></div>
+        <div class="chip-table">${branchRows(ch.top_sellers,'sell') || '<div class="chip-empty">暫無資料</div>'}</div>
+      </section>
+    </div>
+
+    ${ch.long_buyers?.length ? `<section class="card chip-long">
+      <div class="chip-card-head"><h3>拉長到近${ch.long_window_days}日的主要買方</h3><span>觀察是否只是短線買盤，或有較長時間累積</span></div>
+      <div class="chip-long-grid">${ch.long_buyers.map((r,i)=>`<div class="chip-long-item"><span>#${i+1} ${esc(r.name)}</span><strong class="${cls(r.net)}">${signed(r.net)}</strong></div>`).join('')}</div>
+    </section>` : ''}
+
+    <div class="chip-note">${esc(ch.note||'')}</div>`;
+}
+
 function companyPage(id) {
   const c=state.data.companies.find(x=>x.id===id);
   const actionTone = c.decision.action === 'ADD' ? 'good' : c.decision.action === 'TRIM' ? 'warn' : c.decision.action === 'EXIT REVIEW' ? 'bad' : 'blue';
@@ -194,6 +238,8 @@ function companyPage(id) {
 
     <div class="section-title"><h2>故事驗證 Pipeline</h2><div class="hint">從題材走到現金流</div></div>
     <section class="card"><div class="pipeline">${c.pipeline.map(s=>`<div class="stage ${s.status}"><strong>${s.status==='ok'?'✅':s.status==='partial'?'🟡':'⬜'} ${esc(s.name)}</strong><p>${esc(s.note)}</p></div>`).join('')}</div></section>
+
+    ${chipSection(c)}
 
     <div class="section-title"><h2>估值情境</h2><div class="hint">假設可在 config/valuation.json 修改</div></div>
     <section class="card"><div class="scenarios">${Object.entries(c.valuation.scenarios).map(([name,s])=>`<div class="scenario"><div class="name">${name.toUpperCase()}</div><div class="fair">${fmt(s.fair_value,0)}</div><div class="details">${esc(s.description)}</div></div>`).join('')}</div></section>
