@@ -1,0 +1,11 @@
+{
+  "branch_id": "9887",
+  "branch_name": "元大經紀",
+  "target": {"id": "7853", "name": "政美應用"},
+  "radar": [
+    {"id": "7853", "name": "政美應用"},
+    {"id": "4573", "name": "高明鐵"},
+    {"id": "7686", "name": "捷立康"}
+  ],
+  "source": "https://signova.tw/stock/{stock_id}"
+}
