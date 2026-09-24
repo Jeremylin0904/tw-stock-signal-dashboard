@@ -28,41 +28,83 @@ function sparkline(history=[]) {
     const prev=i>0?Number(a[i-1].close):null;
     return {...x, close, day_pct:prev?((close/prev)-1)*100:null};
   });
-  if (rows.length < 2) return '<div class="spark"></div>';
-  const w=320,h=76,p=7, vals=rows.map(x=>x.close), min=Math.min(...vals), max=Math.max(...vals), r=Math.max(1,max-min);
-  const points=rows.map((x,i)=>({
-    ...x,
-    sx:p+(w-p*2)*i/(rows.length-1),
-    sy:p+(h-p*2)*(1-(x.close-min)/r)
-  }));
-  const pts=points.map(x=>`${x.sx},${x.sy}`).join(' ');
-  const area=`${p},${h-p} ${pts} ${w-p},${h-p}`;
-  const step=(w-p*2)/(rows.length-1);
+  if (rows.length < 2) return '<div class="price-chart"></div>';
+
+  const w=420,h=132,left=6,right=8,top=8,priceBottom=91,volTop=101,volBottom=124;
+  const closes=rows.map(x=>x.close);
+  const rawMin=Math.min(...closes), rawMax=Math.max(...closes), rawRange=Math.max(1,rawMax-rawMin);
+  const min=rawMin-rawRange*.08, max=rawMax+rawRange*.08, range=Math.max(1,max-min);
+  const maxVol=Math.max(1,...rows.map(x=>Number(x.volume)||0));
+  const xAt=i=>left+(w-left-right)*i/(rows.length-1);
+  const yAt=v=>top+(priceBottom-top)*(1-(v-min)/range);
+
+  const ma=rows.map((x,i)=>{
+    if(i<19) return null;
+    const avg=rows.slice(i-19,i+1).reduce((s,r)=>s+r.close,0)/20;
+    return avg;
+  });
+
+  const points=rows.map((x,i)=>({...x,sx:xAt(i),sy:yAt(x.close),ma20:ma[i]}));
+  const closePts=points.map(x=>`${x.sx},${x.sy}`).join(' ');
+  const area=`${left},${priceBottom} ${closePts} ${w-right},${priceBottom}`;
+  const maPts=points.filter(x=>x.ma20!=null).map(x=>`${x.sx},${yAt(x.ma20)}`).join(' ');
+  const step=(w-left-right)/Math.max(1,rows.length-1);
+  const barW=Math.max(1.2,Math.min(5,step*.62));
+
+  const grid=[.25,.5,.75].map(t=>{
+    const y=top+(priceBottom-top)*t;
+    return `<line class="chart-gridline" x1="${left}" x2="${w-right}" y1="${y}" y2="${y}"></line>`;
+  }).join('');
+
+  const volumes=points.map(x=>{
+    const v=Number(x.volume)||0;
+    const bh=(volBottom-volTop)*(v/maxVol);
+    return `<rect class="volume-bar" x="${x.sx-barW/2}" y="${volBottom-bh}" width="${barW}" height="${Math.max(.8,bh)}" rx=".7"></rect>`;
+  }).join('');
+
+  const latest=points[points.length-1];
   const zones=points.map((x,i)=>{
     const zx=Math.max(0,x.sx-step/2), zw=Math.min(w,zx+step)-zx;
     const meta=encodeURIComponent(JSON.stringify({
-      date:x.date,close:x.close,open:x.open,high:x.high,low:x.low,volume:x.volume,day_pct:x.day_pct
+      date:x.date,close:x.close,open:x.open,high:x.high,low:x.low,volume:x.volume,
+      day_pct:x.day_pct,ma20:x.ma20
     }));
-    return `<rect class="spark-zone" x="${zx}" y="0" width="${Math.max(6,zw)}" height="${h}" data-x="${x.sx}" data-y="${x.sy}" data-meta="${meta}"></rect>`;
+    return `<rect class="chart-zone" x="${zx}" y="0" width="${Math.max(6,zw)}" height="${h}" data-x="${x.sx}" data-y="${x.sy}" data-meta="${meta}"></rect>`;
   }).join('');
-  return `<div class="spark spark-chart">
-    <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-label="股價走勢圖">
-      <polygon class="area" points="${area}"/>
-      <polyline class="line" points="${pts}"/>
-      <line class="spark-guide" x1="0" x2="0" y1="0" y2="${h}"></line>
-      <circle class="spark-focus" cx="0" cy="0" r="3.5"></circle>
-      ${zones}
-    </svg>
-    <div class="spark-tooltip" role="status"></div>
+
+  const rangePct=((latest.close/rows[0].close)-1)*100;
+  return `<div class="price-chart">
+    <div class="chart-header">
+      <div class="chart-legend"><span class="legend-close"></span>收盤 <span class="legend-ma"></span>MA20 <span class="chart-period">3M</span></div>
+      <div class="chart-stats"><span class="${cls(rangePct)}">${pct(rangePct)}</span><span>H ${fmt(rawMax,1)} · L ${fmt(rawMin,1)}</span></div>
+    </div>
+    <div class="chart-canvas">
+      <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-label="近三個月股價與成交量">
+        ${grid}
+        <polygon class="price-area" points="${area}"></polygon>
+        ${volumes}
+        <polyline class="ma-line" points="${maPts}"></polyline>
+        <polyline class="price-line" points="${closePts}"></polyline>
+        <line class="latest-line" x1="${left}" x2="${w-right}" y1="${latest.sy}" y2="${latest.sy}"></line>
+        <circle class="latest-dot" cx="${latest.sx}" cy="${latest.sy}" r="3.2"></circle>
+        <line class="chart-guide-x" x1="0" x2="0" y1="${top}" y2="${volBottom}"></line>
+        <line class="chart-guide-y" x1="${left}" x2="${w-right}" y1="0" y2="0"></line>
+        <circle class="chart-focus" cx="0" cy="0" r="3.8"></circle>
+        ${zones}
+      </svg>
+      <div class="chart-tooltip" role="status"></div>
+    </div>
+    <div class="chart-footer"><span>${esc(rows[0].date)}</span><span>Volume</span><span>${esc(latest.date)}</span></div>
   </div>`;
 }
 
 function bindSparkTooltips() {
-  document.querySelectorAll('.spark-chart').forEach(chart=>{
-    const tip=chart.querySelector('.spark-tooltip');
-    const guide=chart.querySelector('.spark-guide');
-    const focus=chart.querySelector('.spark-focus');
-    chart.querySelectorAll('.spark-zone').forEach(zone=>{
+  document.querySelectorAll('.price-chart').forEach(chart=>{
+    const tip=chart.querySelector('.chart-tooltip');
+    const guideX=chart.querySelector('.chart-guide-x');
+    const guideY=chart.querySelector('.chart-guide-y');
+    const focus=chart.querySelector('.chart-focus');
+    chart.querySelectorAll('.chart-zone').forEach(zone=>{
       zone.addEventListener('pointerenter',show);
       zone.addEventListener('pointermove',show);
       zone.addEventListener('pointerleave',hide);
@@ -71,15 +113,24 @@ function bindSparkTooltips() {
         const x=Number(zone.dataset.x), y=Number(zone.dataset.y);
         const vb=zone.ownerSVGElement.viewBox.baseVal;
         const left=(x/vb.width)*100, top=(y/vb.height)*100;
-        guide.setAttribute('x1',x); guide.setAttribute('x2',x); guide.classList.add('show');
+        guideX.setAttribute('x1',x); guideX.setAttribute('x2',x);
+        guideY.setAttribute('y1',y); guideY.setAttribute('y2',y);
+        guideX.classList.add('show'); guideY.classList.add('show');
         focus.setAttribute('cx',x); focus.setAttribute('cy',y); focus.classList.add('show');
         const vol=m.volume==null?'—':Number(m.volume).toLocaleString('zh-TW');
-        tip.innerHTML=`<strong>${esc(m.date||'')}</strong><span>收 ${fmt(m.close,1)} · ${pct(m.day_pct)}</span><span>開 ${fmt(m.open,1)}　高 ${fmt(m.high,1)}　低 ${fmt(m.low,1)}</span><span>量 ${vol}</span>`;
-        tip.style.left=`${Math.min(82,Math.max(8,left))}%`;
-        tip.style.top=`${Math.max(4,top-12)}%`;
+        const ma=m.ma20==null?'—':fmt(m.ma20,1);
+        tip.innerHTML=`<strong>${esc(m.date||'')}</strong>
+          <span>收 <b>${fmt(m.close,1)}</b> · <b class="${cls(m.day_pct)}">${pct(m.day_pct)}</b></span>
+          <span>開 ${fmt(m.open,1)}　高 ${fmt(m.high,1)}　低 ${fmt(m.low,1)}</span>
+          <span>MA20 ${ma}　量 ${vol}</span>`;
+        tip.style.left=`${Math.min(84,Math.max(16,left))}%`;
+        tip.style.top=`${Math.max(8,top-8)}%`;
         tip.classList.add('show');
       }
-      function hide(){ tip.classList.remove('show'); guide.classList.remove('show'); focus.classList.remove('show'); }
+      function hide(){
+        tip.classList.remove('show');
+        guideX.classList.remove('show'); guideY.classList.remove('show'); focus.classList.remove('show');
+      }
     });
   });
 }
