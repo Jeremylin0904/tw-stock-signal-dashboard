@@ -9,13 +9,79 @@ const esc = (s='') => String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;
 function badge(text, tone='blue') { return `<span class="badge ${tone}">${esc(text)}</span>`; }
 function sourceBadge(level) { return level === 'official' ? badge('✅ 官方','good') : level === 'rumor' ? badge('⚠️ 待驗證','warn') : badge('🟦 次級來源','blue'); }
 
-function sparkline(values=[]) {
-  const v = values.filter(x => Number.isFinite(Number(x))).map(Number);
-  if (v.length < 2) return '<div class="spark"></div>';
-  const w=320,h=62,p=4, min=Math.min(...v), max=Math.max(...v), r=Math.max(1,max-min);
-  const pts=v.map((x,i)=>`${p+(w-p*2)*i/(v.length-1)},${p+(h-p*2)*(1-(x-min)/r)}`).join(' ');
+function safeUrl(url='') {
+  try { const u=new URL(url); return ['http:','https:'].includes(u.protocol)?u.href:''; } catch { return ''; }
+}
+function newsLink(n, includeCompany=false) {
+  const url=safeUrl(n.url||'');
+  const title=`${includeCompany?esc(n.company)+'｜':''}${esc(n.title)}`;
+  const body=url
+    ? `<a class="news-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer"><span>${title}</span><span class="news-arrow">↗</span></a>`
+    : `<div class="title">${title}</div>`;
+  const when=esc(n.published_at||n.date||'');
+  return `<li class="news-item"><div><div class="title">${body}</div><div class="meta">${when} · ${esc(n.source)}</div></div>${sourceBadge(n.confidence)}</li>`;
+}
+
+function sparkline(history=[]) {
+  const rows=(history||[]).filter(x=>Number.isFinite(Number(x.close))).map((x,i,a)=>{
+    const close=Number(x.close);
+    const prev=i>0?Number(a[i-1].close):null;
+    return {...x, close, day_pct:prev?((close/prev)-1)*100:null};
+  });
+  if (rows.length < 2) return '<div class="spark"></div>';
+  const w=320,h=76,p=7, vals=rows.map(x=>x.close), min=Math.min(...vals), max=Math.max(...vals), r=Math.max(1,max-min);
+  const points=rows.map((x,i)=>({
+    ...x,
+    sx:p+(w-p*2)*i/(rows.length-1),
+    sy:p+(h-p*2)*(1-(x.close-min)/r)
+  }));
+  const pts=points.map(x=>`${x.sx},${x.sy}`).join(' ');
   const area=`${p},${h-p} ${pts} ${w-p},${h-p}`;
-  return `<div class="spark"><svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polygon class="area" points="${area}"/><polyline class="line" points="${pts}"/></svg></div>`;
+  const step=(w-p*2)/(rows.length-1);
+  const zones=points.map((x,i)=>{
+    const zx=Math.max(0,x.sx-step/2), zw=Math.min(w,zx+step)-zx;
+    const meta=encodeURIComponent(JSON.stringify({
+      date:x.date,close:x.close,open:x.open,high:x.high,low:x.low,volume:x.volume,day_pct:x.day_pct
+    }));
+    return `<rect class="spark-zone" x="${zx}" y="0" width="${Math.max(6,zw)}" height="${h}" data-x="${x.sx}" data-y="${x.sy}" data-meta="${meta}"></rect>`;
+  }).join('');
+  return `<div class="spark spark-chart">
+    <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-label="股價走勢圖">
+      <polygon class="area" points="${area}"/>
+      <polyline class="line" points="${pts}"/>
+      <line class="spark-guide" x1="0" x2="0" y1="0" y2="${h}"></line>
+      <circle class="spark-focus" cx="0" cy="0" r="3.5"></circle>
+      ${zones}
+    </svg>
+    <div class="spark-tooltip" role="status"></div>
+  </div>`;
+}
+
+function bindSparkTooltips() {
+  document.querySelectorAll('.spark-chart').forEach(chart=>{
+    const tip=chart.querySelector('.spark-tooltip');
+    const guide=chart.querySelector('.spark-guide');
+    const focus=chart.querySelector('.spark-focus');
+    chart.querySelectorAll('.spark-zone').forEach(zone=>{
+      zone.addEventListener('pointerenter',show);
+      zone.addEventListener('pointermove',show);
+      zone.addEventListener('pointerleave',hide);
+      function show(){
+        const m=JSON.parse(decodeURIComponent(zone.dataset.meta));
+        const x=Number(zone.dataset.x), y=Number(zone.dataset.y);
+        const vb=zone.ownerSVGElement.viewBox.baseVal;
+        const left=(x/vb.width)*100, top=(y/vb.height)*100;
+        guide.setAttribute('x1',x); guide.setAttribute('x2',x); guide.classList.add('show');
+        focus.setAttribute('cx',x); focus.setAttribute('cy',y); focus.classList.add('show');
+        const vol=m.volume==null?'—':Number(m.volume).toLocaleString('zh-TW');
+        tip.innerHTML=`<strong>${esc(m.date||'')}</strong><span>收 ${fmt(m.close,1)} · ${pct(m.day_pct)}</span><span>開 ${fmt(m.open,1)}　高 ${fmt(m.high,1)}　低 ${fmt(m.low,1)}</span><span>量 ${vol}</span>`;
+        tip.style.left=`${Math.min(82,Math.max(8,left))}%`;
+        tip.style.top=`${Math.max(4,top-12)}%`;
+        tip.classList.add('show');
+      }
+      function hide(){ tip.classList.remove('show'); guide.classList.remove('show'); focus.classList.remove('show'); }
+    });
+  });
 }
 
 function companyCard(c) {
@@ -25,7 +91,7 @@ function companyCard(c) {
       <div><h2>${esc(c.name)}</h2><div class="ticker">${c.id} · ${esc(c.role)}</div></div>
       <div><div class="price">${fmt(c.market.price,1)}</div><div class="delta ${cls(c.market.change_pct)}">${pct(c.market.change_pct)}</div></div>
     </div>
-    ${sparkline(c.market.history.map(x=>x.close))}
+    ${sparkline(c.market.history)}
     <div class="status-row">
       ${badge(c.valuation.label, c.valuation.tone)}
       ${badge(c.fundamental.label, c.fundamental.tone)}
@@ -48,8 +114,8 @@ function overview() {
     <div class="grid grid-3">
       ${d.companies.map(c=>`<section class="card"><h3>${c.name}</h3><div class="callout" style="margin-top:10px">${esc(c.thesis)}</div><ul class="list">${c.alerts.slice(0,3).map(a=>`<li><div><div class="title">${esc(a.text)}</div><div class="meta">${esc(a.why)}</div></div>${badge(a.level,a.level==='正面'?'good':a.level==='風險'?'bad':'warn')}</li>`).join('')}</ul></section>`).join('')}
     </div>
-    <div class="section-title"><h2>最新事件</h2><div class="hint">已區分官方、次級來源與待驗證傳聞</div></div>
-    <section class="card"><ul class="list">${d.news.slice(0,10).map(n=>`<li><div><div class="title">${esc(n.company)}｜${esc(n.title)}</div><div class="meta">${esc(n.date)} · ${esc(n.source)}</div></div>${sourceBadge(n.confidence)}</li>`).join('')}</ul></section>`;
+    <div class="section-title"><h2>最新事件</h2><div class="hint">每30分鐘更新 · ${esc(d.news_updated_at||d.generated_at||"—")} · 點標題開原文</div></div>
+    <section class="card"><ul class="list">${d.news.slice(0,12).map(n=>newsLink(n,true)).join('')}</ul></section>`;
 }
 
 function companyPage(id) {
@@ -59,7 +125,7 @@ function companyPage(id) {
     <div class="grid grid-2">
       <section class="card">
         <div class="company-head"><div><h2>${c.name} ${c.id}</h2><div class="ticker">${c.role}</div></div><div><div class="price">${fmt(c.market.price,1)}</div><div class="delta ${cls(c.market.change_pct)}">${pct(c.market.change_pct)}</div></div></div>
-        ${sparkline(c.market.history.map(x=>x.close))}
+        ${sparkline(c.market.history)}
         <div class="status-row">${badge(c.valuation.label,c.valuation.tone)} ${badge(c.fundamental.label,c.fundamental.tone)} ${badge(c.decision.action,actionTone)}</div>
       </section>
       <section class="action-box">
@@ -87,8 +153,8 @@ function companyPage(id) {
       <section class="card"><h3>紅旗</h3><ul class="list">${c.red_flags.map(x=>`<li><div class="title">${esc(x)}</div>${badge('Risk','bad')}</li>`).join('')}</ul></section>
     </div>
 
-    <div class="section-title"><h2>最近新聞</h2></div>
-    <section class="card"><ul class="list">${state.data.news.filter(n=>n.company_id===id).slice(0,10).map(n=>`<li><div><div class="title">${esc(n.title)}</div><div class="meta">${esc(n.date)} · ${esc(n.source)}</div></div>${sourceBadge(n.confidence)}</li>`).join('') || '<li><div class="title">暫無資料</div></li>'}</ul></section>`;
+    <div class="section-title"><h2>最近新聞</h2><div class="hint">每30分鐘更新 · ${esc(state.data.news_updated_at||state.data.generated_at||"—")} · 點標題開原文</div></div>
+    <section class="card"><ul class="list">${state.data.news.filter(n=>n.company_id===id).slice(0,12).map(n=>newsLink(n,false)).join('') || '<li><div class="title">暫無資料</div></li>'}</ul></section>`;
 }
 
 function brokerPage() {
@@ -133,6 +199,7 @@ function render() {
   const app=document.getElementById('app');
   app.innerHTML = state.tab==='overview' ? overview() : state.tab==='broker' ? brokerPage() : state.tab==='valuation' ? valuationPage() : companyPage(state.tab);
   document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===state.tab));
+  bindSparkTooltips();
 }
 
 async function init() {
