@@ -25,11 +25,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Update market / revenue / news / broker data
+      - name: Build baseline dashboard
+        run: python scripts/seed_dashboard.py
+      - name: Update market / revenue / news
         env:
           FINMIND_TOKEN: ${{ secrets.FINMIND_TOKEN }}
           FINMIND_SPONSOR_TOKEN: ${{ secrets.FINMIND_SPONSOR_TOKEN }}
         run: python scripts/update_data.py
+      - name: Update 9887 broker branch
+        env:
+          FINMIND_SPONSOR_TOKEN: ${{ secrets.FINMIND_SPONSOR_TOKEN }}
+        run: python scripts/update_broker_agg.py
       - name: Commit changed data
         run: |
           if git diff --quiet -- site/data/dashboard.json; then
