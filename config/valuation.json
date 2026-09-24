@@ -1,0 +1,30 @@
+{
+  "7853": {
+    "model": "forward_sales",
+    "shares_m": 48.25,
+    "scenarios": {
+      "bear": {"forward_revenue_m": 800, "ps": 8},
+      "base": {"forward_revenue_m": 1200, "ps": 12},
+      "bull": {"forward_revenue_m": 1800, "ps": 15}
+    },
+    "notes": "政美目前獲利尚未穩定，先用未來營收×P/S估值；未證實的台積電大量訂單不納入 Base。"
+  },
+  "3455": {
+    "model": "forward_eps",
+    "scenarios": {
+      "bear": {"eps": 5, "pe": 25},
+      "base": {"eps": 7, "pe": 30},
+      "bull": {"eps": 9, "pe": 35}
+    },
+    "notes": "由田用2027情境 EPS×P/E；14.6535億元矽品採購額不直接等同同期營收。"
+  },
+  "1303": {
+    "model": "forward_eps",
+    "scenarios": {
+      "bear": {"eps": 13, "pe": 12},
+      "base": {"eps": 17, "pe": 14},
+      "bull": {"eps": 21, "pe": 16}
+    },
+    "notes": "南亞 EPS 要拆本業與權益法投資，避免直接把記憶體景氣高點年化。"
+  }
+}
