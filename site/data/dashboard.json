@@ -2362,13 +2362,13 @@
   },
   "news": [
     {
-      "company": "南亞",
-      "company_id": "1303",
-      "title": "《台北股市》投信24日賣超股：聯電、南亞、南亞科 - 富聯網",
+      "company": "由田",
+      "company_id": "3455",
+      "title": "討論牆 | 盤中速報 - 由田(3455)急拉3.72%報265.0元，成交961張 - LINE TODAY",
       "date": "2026-09-26",
-      "published_at": "2026-09-26 09:13",
-      "source": "富聯網",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNWm9wckMtcDJDbVM0WkpKS05zT0hTazVBX2pmNzNuSjdYRUE1SVhLYjhld05HdmRDZEUzSEoxUHRsWWpTdEJBallZMXJaM2RxeHd0eU03M2xRa3FHUVJrOWhEWXZnZnplNmlWUUozWXBiZkFCMm92dURvT3I1VHpTMXhBV3ZOb0FC?oc=5",
+      "published_at": "2026-09-26 14:25",
+      "source": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBuWVg1OVd5OGhCSWxJS0pXTkRITHl1RVU3WTNtWDhMa0lBbmY3UjRSYjB3cEw3SS1sWkxVZHZmWHliSDd0Z0QwOVdJRDF1WjJ4cmtfN2FUU3FHNDQ0c254WlRSZGY?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2472,6 +2472,16 @@
       "confidence": "secondary"
     },
     {
+      "company": "由田",
+      "company_id": "3455",
+      "title": "討論牆 | 盤中速報 - 由田(3455)大漲7.39%，報245.5元 - LINE TODAY",
+      "date": "2026-09-24",
+      "published_at": "2026-09-24 08:45",
+      "source": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1nWFd1eEVfakFtTEcxZUZYMENvUm5SVzAwVXBrRnRCQ1RFMVQzU05vT2lRMHJ5NU9PaHZpMk11NzYxaTJxYWRRdzdLWEpybUhZT09HWTAzWERGa0s3cFE3dHZQWUc?oc=5",
+      "confidence": "secondary"
+    },
+    {
       "company": "南亞",
       "company_id": "1303",
       "title": "1303 南亞 - 大人成本全在60以下別被割了，籌碼是他們誘多，隨便賣也能大割- 股市爆料同學會 - CMoney",
@@ -2479,6 +2489,16 @@
       "published_at": "2026-09-23 20:02",
       "source": "CMoney",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBMN29Bb1plN1RTV2Y1eEwwMVRhZnBYTXFyVVY2QVFOdGRJUE45cjJrOUtaejJiZW5GeUdDellnbTRiUjlTVEtLWDdvbGFIZFFCaTBXRDgtV04?oc=5",
+      "confidence": "secondary"
+    },
+    {
+      "company": "南亞",
+      "company_id": "1303",
+      "title": "個股：南亞(1303)受邀參加中國信託證券9/24舉辦之法人說明會 - 富聯網",
+      "date": "2026-09-23",
+      "published_at": "2026-09-23 16:08",
+      "source": "富聯網",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTjEtNjdvN1M3WkJvM05wYXhjSmdndE5TZFc2MFY1S041OUEwZXljbzVudE9MOFNpVF9YdDQwYURZdEZGZ3RHTEpibW0tcUd4cTRSbXBrYmJXMHFwNFBnYW5tOHpfOUQ1YzExbkJ1elRscmt4R3hGbkQ1VXYyWHNxZ1ZYMHZtMGl3?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2554,16 +2574,6 @@
     {
       "company": "由田",
       "company_id": "3455",
-      "title": "【11:24 即時新聞】由田(3455)股價上漲逾6%，受惠AI帶動PCB載板AOI裝置需求＋短線多頭格局延續惟上檔解套賣壓漸增 - CMoney投資網誌",
-      "date": "2026-08-31",
-      "published_at": "2026-08-31 15:00",
-      "source": "CMoney投資網誌",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNQWxOVGk5elJsVGtucWhrb0RiNGYzOW53MTcwNzI0cTdqYS04RF9pRnhrTjdjOTdCRFNveFR0UHN6My1wQ0otMUExcnphZVFwR2JuSHlyTFM4Yk5uaF8wMnhnUXJfS3RlRmstMVIzWVZoUzEyTmxXTjNYblVnOVotSFlrcmFmWlFIVUo5MVR3?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
       "title": "高階載板、半導體雙引擎由田下半年拚優上半年- 新聞 - MoneyDJ",
       "date": "2026-08-12",
       "published_at": "2026-08-12 15:00",
@@ -2579,16 +2589,6 @@
       "published_at": "2026-08-10 15:00",
       "source": "CMoney",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9GWV9GN2dXUXhQWDQxeGFnUUk4bEYtdkRpcjFlSUZJMXFLaHBxMlo3bU1IY0dIVVRUbTBTQTJmU1hONFRGY3NKc1VXQ0N4RElRSEtZV3F1M0g?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "【2026/07月營收公告】由田(3455) 七月營收1.5億元，創近9個月以來新高，月增78.1％ - CMoney",
-      "date": "2026-08-10",
-      "published_at": "2026-08-10 15:00",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBXRDd4b0dNMm12MTNmTW5FNE9pTTRaMElYWFRPZlhfNEVJTlJCWmpOWlBlQnRkeDU4QUhiVnZnYlN3S2YwZ1RFeEdRYzRVd05Zb3BCLXdIT19kWmtCZklhU0hQX0s2UFk?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2662,5 +2662,5 @@
       "confidence": "secondary"
     }
   ],
-  "news_updated_at": "2026-09-26 22:30"
+  "news_updated_at": "2026-09-27 02:03"
 }
