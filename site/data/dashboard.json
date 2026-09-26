@@ -2382,16 +2382,6 @@
       "confidence": "secondary"
     },
     {
-      "company": "南亞",
-      "company_id": "1303",
-      "title": "全年獲利拚破1000億元！南亞電子材料、轉投資南亞科雙助攻 法人估EPS上看12.7元 - Yahoo股市",
-      "date": "2026-09-25",
-      "published_at": "2026-09-25 20:40",
-      "source": "Yahoo股市",
-      "url": "https://news.google.com/rss/articles/CBMiygNBVV95cUxNUWFiN1dvamoyaFBRY3JlVjA4RlNCLTAtTk0zYXhQQ1Z4Y193YXktS0pVc0pBeWdlczdmRzVWOXJVLTdjRDh2TndScXlMcDBLRFNDdnpyaWpzQVhDNnlSUEVBZ05abkRMd2xWT3N6a3VfZDZOSG5wSUN0UjhPX1BoNVNVWmpYMTlfTWlNMkVKNWw2UGtMcDE1U3NCVHdXeTZneXRzZVNNN2xXMXFVMW5Tb0ZCb202Rlh4QkdFRzJEMmUxV09JSHRYemNmT0NJckpIZlk4SmpQeEh5Rkp0N1A4SzF4VERkbF9MOEZpU1hyMkJFOWpDYXA3ekV0ZWlGNVM5Z2JGX3d6bENGaEpjMmEwaUJpVWFwbGhJZWJUYWNNVTlOWC1LV1gxZDA5VVRyVEd4OWtZR0t6V0p0ZF9tTmo1aVQwbDVIcTZzUFJTQk5oSWNZTkpQZ0dMQXpNS1JPTndQREZuRnMzS3NHajhnWW16TmEwRVpabDNyZDdhWVVvOGhmZ190eHpIT0ZtNWJ6SWpHcG5PNVY2dE92VndudTM3MENMQkJXNkpyV1ZJYy1OZTk5TV9MaTlRNFN4NzJsQXRfTjk1azAzOEU1QQ?oc=5",
-      "confidence": "secondary"
-    },
-    {
       "company": "由田",
       "company_id": "3455",
       "title": "討論牆 | 盤中速報 - 由田(3455)急拉3.88%報254.0元，成交741張 - LINE TODAY",
@@ -2399,6 +2389,16 @@
       "published_at": "2026-09-25 15:35",
       "source": "LINE TODAY",
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE85cjBKbmZHQzZqejAyMUdCbXZ4dlZwNHlfdngzN0c1MDFEWWJYeXZqZmNLU2pFMThRM2ZWTjNfaG80RjZZQllXRXhOR3oyOExWWHl5cmQ0MloxcnByc09tWkIyWVM?oc=5",
+      "confidence": "secondary"
+    },
+    {
+      "company": "南亞",
+      "company_id": "1303",
+      "title": "討論牆 | 盤中速報 - 南亞(1303)大漲7.03%，報236元 - LINE TODAY",
+      "date": "2026-09-24",
+      "published_at": "2026-09-24 22:46",
+      "source": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1XaW45bmhYamViREhVcGtoTEwxOWpLcXpiX1JYdFZET0NQZ05wU1FOR1hhX2VwYTdzV00yMF93bk5QTTlfMDlwbEFUZzhpWkc2YkVNWlFHMlFzZnBMUk5qa3N1T1c?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2524,11 +2524,11 @@
     {
       "company": "政美應用",
       "company_id": "7853",
-      "title": "7853 政美應用- 回測這支最大量的週K - 股市爆料同學會 - CMoney",
-      "date": "2026-09-12",
-      "published_at": "2026-09-12 15:00",
+      "title": "7853 政美應用- 相信大家都喜歡正妹- 股市爆料同學會 - CMoney",
+      "date": "2026-09-13",
+      "published_at": "2026-09-13 14:37",
       "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1hbGxWWUdwenRKUEVYQUpvZFVaT21GVnF5RVl1Z3l6TGtlTTAxSkVkNWl6bDRDTGVTQ3VuckVCaE9RODl5T1VpbGI1Y1FTaDZVajF3bDZWYUw?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9NRkVTSnotelZLNEN5dkFmd1MwLVJJYzlUUEM3U0tjcEZ2LWlBbWNsM3RKYWlYVEpER1oyejJPNk8zbzhuY1JVTlhZVTVqa2JnaTNfRkJXWE0?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2615,8 +2615,8 @@
       "company": "政美應用",
       "company_id": "7853",
       "title": "7853 政美應用- 阿美，差不多可以開始佈局了- 股市爆料同學會 - CMoney",
-      "date": "2026-05-27",
-      "published_at": "2026-05-27 15:00",
+      "date": "2026-05-26",
+      "published_at": "2026-05-26 15:00",
       "source": "CMoney",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBnYnhBWG9BRmNmZkI0cHNybVRhdndmVWoyZ0pZNUVFdnZ0YVlBUnBpaElNX0doNUFJakNBTTB6NzJ6N0NvanNoM0cwcnloNFdtUExmUHU3bjI?oc=5",
       "confidence": "secondary"
@@ -2662,5 +2662,5 @@
       "confidence": "secondary"
     }
   ],
-  "news_updated_at": "2026-09-26 17:53"
+  "news_updated_at": "2026-09-26 22:30"
 }
