@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01 03:57",
+  "generated_at": "2026-10-01 21:50",
   "mode": "自動更新（分點手動備援）",
   "companies": [
     {
@@ -7,18 +7,10 @@
       "name": "政美應用",
       "role": "3D Metrology / RDL / Bump / CoWoS 量測",
       "market": {
-        "price": 405.5,
-        "change_pct": 1.884,
-        "as_of": "2026-09-30",
+        "price": 420.0,
+        "change_pct": 3.576,
+        "as_of": "2026-10-01",
         "history": [
-          {
-            "date": "2026-06-30",
-            "open": 328.0,
-            "high": 352.0,
-            "low": 326.5,
-            "close": 346.0,
-            "volume": 716048
-          },
           {
             "date": "2026-07-01",
             "open": 346.0,
@@ -522,6 +514,14 @@
             "low": 388.5,
             "close": 405.5,
             "volume": 889048
+          },
+          {
+            "date": "2026-10-01",
+            "open": 404.0,
+            "high": 421.5,
+            "low": 402.5,
+            "close": 420.0,
+            "volume": 1123849
           }
         ]
       },
@@ -636,7 +636,7 @@
         "label": "偏貴",
         "tone": "bad",
         "base_fair": 298.4,
-        "base_upside_pct": -26.4,
+        "base_upside_pct": -29.0,
         "scenarios": {
           "bear": {
             "fair_value": 132.6,
@@ -719,18 +719,10 @@
       "name": "由田",
       "role": "AOI / 先進封裝缺陷檢測",
       "market": {
-        "price": 267.0,
-        "change_pct": 0.0,
-        "as_of": "2026-09-30",
+        "price": 287.0,
+        "change_pct": 7.491,
+        "as_of": "2026-10-01",
         "history": [
-          {
-            "date": "2026-06-30",
-            "open": 221.0,
-            "high": 238.0,
-            "low": 221.0,
-            "close": 235.0,
-            "volume": 1024358
-          },
           {
             "date": "2026-07-01",
             "open": 244.5,
@@ -1242,6 +1234,14 @@
             "low": 260.5,
             "close": 267.0,
             "volume": 5680604
+          },
+          {
+            "date": "2026-10-01",
+            "open": 266.0,
+            "high": 292.0,
+            "low": 258.0,
+            "close": 287.0,
+            "volume": 3952637
           }
         ]
       },
@@ -1351,7 +1351,7 @@
         "label": "偏貴",
         "tone": "bad",
         "base_fair": 210.0,
-        "base_upside_pct": -21.3,
+        "base_upside_pct": -26.8,
         "scenarios": {
           "bear": {
             "fair_value": 125.0,
@@ -1434,18 +1434,10 @@
       "name": "南亞",
       "role": "AI電子材料 / CCL / 銅箔 / 玻纖布 / 環氧樹脂",
       "market": {
-        "price": 255.5,
-        "change_pct": 3.441,
-        "as_of": "2026-09-30",
+        "price": 254.0,
+        "change_pct": -0.587,
+        "as_of": "2026-10-01",
         "history": [
-          {
-            "date": "2026-06-30",
-            "open": 157.0,
-            "high": 166.5,
-            "low": 157.0,
-            "close": 166.5,
-            "volume": 31573929
-          },
           {
             "date": "2026-07-01",
             "open": 177.5,
@@ -1957,6 +1949,14 @@
             "low": 245.5,
             "close": 255.5,
             "volume": 120802959
+          },
+          {
+            "date": "2026-10-01",
+            "open": 256.0,
+            "high": 261.5,
+            "low": 250.5,
+            "close": 254.0,
+            "volume": 57027171
           }
         ]
       },
@@ -2066,7 +2066,7 @@
         "label": "合理區間",
         "tone": "blue",
         "base_fair": 238.0,
-        "base_upside_pct": -6.8,
+        "base_upside_pct": -6.3,
         "scenarios": {
           "bear": {
             "fair_value": 156.0,
@@ -2252,7 +2252,7 @@
           "branches_count": 547
         },
         {
-          "observed_at": "2026-10-01 03:57",
+          "observed_at": "2026-10-01 21:50",
           "source_date": "2026-09-30",
           "stock_id": "7853",
           "window_days": 5,
@@ -2356,26 +2356,6 @@
     {
       "company": "南亞",
       "company_id": "1303",
-      "title": "1303 南亞 - 哥哥加油啊~ 今天塑起來有點軟掉>~< - 股市爆料同學會 - CMoney",
-      "date": "2026-10-01",
-      "published_at": "2026-10-01 11:31",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE94VEpwMnVXYTUyUzMxNHFXLVJfX3VLOHdtZHFqc2IzVlNLTzIyWjlFV1VGeEtyU08zWHJhNUJIWXhvM1RwNl9McmxJTFZJRzJXR1dzdUh4QmM?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "南亞",
-      "company_id": "1303",
-      "title": "主動式ETF瘋搶台塑二寶！00991A、00400A猛增持「這1寶」 內外資都看好：目標價最高400元 - ftnn.com.tw",
-      "date": "2026-10-01",
-      "published_at": "2026-10-01 09:40",
-      "source": "ftnn.com.tw",
-      "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5QWUxvMFdWLW4yaEhvLTJnWjJfSmx2Yzh1UUJvaWp1T0phaEJKNDlES1NoQi0yalpoUDZrN0R1eG9ueHhaUHJUMFFvRQ?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "南亞",
-      "company_id": "1303",
       "title": "南亞、台塑化...主動式ETF爆買台塑二寶掃貨這檔4000張法人曝關鍵：最新目標價也說了- 上市櫃 - 旺得富理財網",
       "date": "2026-10-01",
       "published_at": "2026-10-01 08:37",
@@ -2386,41 +2366,21 @@
     {
       "company": "南亞",
       "company_id": "1303",
-      "title": "台塑、南亞各擁利多- 日報 - 工商時報",
+      "title": "1303 南亞 - 哥哥加油啊~ 今天塑起來有點軟掉>~< - 股市爆料同學會 - CMoney",
       "date": "2026-10-01",
-      "published_at": "2026-10-01 03:00",
-      "source": "工商時報",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE8ySEVISzZkY011clZHLUlKWlRjeG1rVFM0QUM3N2dtTWlGelJvcFVQTGd1T2RmYWpnR0Fna3JHRXNEak1xQk1ycUJ2alJ2b2NPOU5KQmVOUlRyRnFfdHY4?oc=5",
+      "published_at": "2026-10-01 11:31",
+      "source": "CMoney",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE94VEpwMnVXYTUyUzMxNHFXLVJfX3VLOHdtZHFqc2IzVlNLTzIyWjlFV1VGeEtyU08zWHJhNUJIWXhvM1RwNl9McmxJTFZJRzJXR1dzdUh4QmM?oc=5",
       "confidence": "secondary"
     },
     {
       "company": "南亞",
       "company_id": "1303",
-      "title": "南亞明年EPS衝17元　目標價上看310元！ - 鏡週刊Mirror Media",
-      "date": "2026-10-01",
-      "published_at": "2026-10-01 02:02",
-      "source": "鏡週刊Mirror Media",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE80Zm9sSU1USlNaZnZ2VUVwRWZRaG41cGhuU3huTDJPYnI4Umx1Z19JVFJYdVlMUnBIZFJSLXh3ZVQwYjR2amp6MVdoaC14dXk2aDdkTnFyckpPR3FOaF9EZmxB0gFiQVVfeXFMTzRmb2xJTVRKU1pmdnZVRXBFZlFobjVwaG5TeG5MMk9icjhSbHVnX0lUUlh1WUxScEhkUlIteHdlVDBiNHZqanoxV2hoLXh1eTZoN2ROcXJySk9HcU5oX0RmbEE?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "南亞",
-      "company_id": "1303",
-      "title": "南亞高階CCL大單拚Q4敲定 續新增30萬張產能 - 新聞 - MoneyDJ理財網",
+      "title": "【Hot台股】南亞飆漲半根寫新天價265元！網笑「空軍安心上路」 分析師看多：仍有空間 - Yahoo股市",
       "date": "2026-09-30",
-      "published_at": "2026-09-30 11:58",
-      "source": "MoneyDJ理財網",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTzhacG8zN0RHd3VRTGRydWg1eGtPS3lUZ1d6MlRTbi1USlk5QVlaWlNIVGZlQW85Ui1xZl9hd1RoS2pQTjhhVjNrVXZGbXNqWFI4SG9NOFlwQnpGb3VKenN2dHhsOU5scHdrOExycDRVRmJlM0ZkR1U5NnhwWFhKTS1QSGM3OW1QNzlLS054SVVOQQ?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "南亞",
-      "company_id": "1303",
-      "title": "台塑化、南亞、台塑、台化…台塑四寶選誰？最新目標價曝光，這檔外資喊到3位數，利多頻發還會再漲？ - 今周刊",
-      "date": "2026-09-29",
-      "published_at": "2026-09-29 16:44",
-      "source": "今周刊",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNaXJ1WWZITFZxQnR0eEllS0JfbHh6ZmFjUHJUMzRVQ2ZYUm5EblNpLUxwSjR3LUFuVTN4cUJubXk5TF8zaDF2bjRrLTZ5WWpCd2lOcmd0VVJkNUFLWXNveHpOWEFpN2RYeVhTVmtSU1QwZ1I4UXpFMlVvelBlQklZSg?oc=5",
+      "published_at": "2026-09-30 11:17",
+      "source": "Yahoo股市",
+      "url": "https://news.google.com/rss/articles/CBMilARBVV95cUxQNXhkTEt0NlhMU29MVFFUSWdaTm5NVDI1ekJ5eTZ5OS1PLUJUNzRnZmN4dGtpblJKMkc3SE5XM245akZvQkR5b1JBa1h2Szdzbzc4eVFZeGsxUk5VYldybm9VZnlaTlFBUU53NXNHbzM2T1gxcmRvMDBuNXN6UGVOalg2YW1xbHUzelNHRXN1TjNlVlNPUlBOZEJVcEd2X2poeVppSERDS0JrdTVXaVRwbmFIck9FS0d3MnpMU3Fvb3M4TXJPWl9WSlgzUXlISURtS3BESzlPcG1NYUloMzVHUFZhUlFIY2cwbTNlTFNXQk1jbzREWHdtd0Itb0lkWHhRZ3paNi1Kcm9DeEhtRUtOVUFlTV9veGtjUlpBSUpVWGVBMkIwS3pYcGU1ZGJiemppR0JXaW9ET0hCdi04ZDdfSE1nNVlJX0toT3pHOWpzWjlzOVc1S2p5ZUk5SktFeTBSSGI5RlhFanJVTW5kUmQyRlZUeUFOT0VteVlCc1lRQjhTQ3ItWHlaaGpqanQ5R1c2Z2o0OVN6MnhzV1pWdHdlR1NxWXVBRGR5b0JndXlyWGVoeHNSZnRLNzF2NHFTaWw3TGFOUmdyUUlTOXJnTUl1NUdoU3NhXzRYYmYzcGl4RFNNVXZ3d0toLXlORU16LXhrN08zMDdBQUQzZWN6ZXVyOUcxOVAtbVZsbVI0bVVWclpTOVhi?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2431,6 +2391,16 @@
       "published_at": "2026-09-29 13:21",
       "source": "CMoney投資網誌",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQM2JIUUdUTUY0dnpId0FYWU1DbDJPQUdwNU82NDBaa2pzbTRQS2NubEUwcEQ5ejc2TXExaVQ4MXdCQzdzVWc2YUpKWHJpZF9YMjJOYTVlZUh0NGRaVzN4NTdaanJlWnVZTmZnYXhHd0VNNExlNGh3bDhFVkJXSkhfa1VqZVdSYU9qZ3cwUTJn?oc=5",
+      "confidence": "secondary"
+    },
+    {
+      "company": "南亞",
+      "company_id": "1303",
+      "title": "台塑化、南亞、台塑、台化…台塑四寶選誰？最新目標價曝光，這檔外資喊到3位數，利多頻發還會再漲？ - 今周刊",
+      "date": "2026-09-29",
+      "published_at": "2026-09-29 16:44",
+      "source": "今周刊",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNaXJ1WWZITFZxQnR0eEllS0JfbHh6ZmFjUHJUMzRVQ2ZYUm5EblNpLUxwSjR3LUFuVTN4cUJubXk5TF8zaDF2bjRrLTZ5WWpCd2lOcmd0VVJkNUFLWXNveHpOWEFpN2RYeVhTVmtSU1QwZ1I4UXpFMlVvelBlQklZSg?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2476,106 +2446,6 @@
     {
       "company": "政美應用",
       "company_id": "7853",
-      "title": "7853 政美應用- 要相信先進封裝供應鏈，拉回就是買點。 - 股市爆料同學會 - CMoney",
-      "date": "2026-09-25",
-      "published_at": "2026-09-25 07:59",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5lVmo5NEJlWjJoY2Q5VjRtTVFLbmJoSUM2ekI0YXZ5aHZYSVJfVlI5S09oXzRYX3ZiYUd1TUs4WHpYS0tLanBCMS1TdGNxb1RiQmhWZ0lzbjA?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "南亞",
-      "company_id": "1303",
-      "title": "南亞(1303)高階CCL真的放量了嗎？M9認證時程與日東紡玻纖布放量時間曝光！ - news.cnyes.com",
-      "date": "2026-09-24",
-      "published_at": "2026-09-24 15:00",
-      "source": "news.cnyes.com",
-      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBkNUpsNGNsT0plbGFvaEkxdEQtNVNOTFZFUGZicUtla1Y1SXlhZU8wMHNZWVYxSDhvajZaZVRnYy00TGdQYnlhQmxNZDhxNFE?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "【09:49 即時新聞】由田(3455)股價走強，AI帶動AOI設備成盤中焦點 - CMoney投資網誌",
-      "date": "2026-09-24",
-      "published_at": "2026-09-24 09:49",
-      "source": "CMoney投資網誌",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNaTJ1Z1VfRm5TSGtUOVhIcHJUbkRfU2VJSGhZaXdhVHQ3dDg5cHJGczVwXzFLbTRmQW9ZUjBJVEhHbW9LRXZ4dEx3S2JoM2plSlU5LUptQlczdEQxUWk4ekJsUnJ5bnVPWHNPRE1yTE04RTZoTm9IcFk5YnBZeFBzWjZoYzZTSTVkM29DSzBB?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "討論牆 | 盤中速報 - 由田(3455)大漲7.39%，報245.5元 - LINE TODAY",
-      "date": "2026-09-24",
-      "published_at": "2026-09-24 08:45",
-      "source": "LINE TODAY",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1nWFd1eEVfakFtTEcxZUZYMENvUm5SVzAwVXBrRnRCQ1RFMVQzU05vT2lRMHJ5NU9PaHZpMk11NzYxaTJxYWRRdzdLWEpybUhZT09HWTAzWERGa0s3cFE3dHZQWUc?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "【12:06 即時新聞】由田(3455) 盤中走強逼近8% AI AOI 裝置成盤面焦點 - CMoney投資網誌",
-      "date": "2026-09-16",
-      "published_at": "2026-09-16 15:00",
-      "source": "CMoney投資網誌",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOMmczQThKVDRBVUZvel9lUnBCUTh1TFo2amphWHpZSmhFZC11NHNCazhMcHFlNDJfSmdvQ285VURVZ3ZwNldJdmg0ZklXNjZCWGE0bW93WGhKOWJNSFdDX0N3Q212TXlvdUp4bG4xejRLVG5tcUxaLXBMMGlzRUgzREYwSnJLc1Q1VXZQTUVB?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "【12:06 即時新聞】由田(3455) 盤中走強逼近8% AI AOI 裝置成盤面焦點 - CMoney",
-      "date": "2026-09-15",
-      "published_at": "2026-09-15 15:00",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5ZbF9CN0wzZFJlajh5ak5hS01taW5Pb1E5blRFT2Z4MVRXekUzSU5INHF2ZWdmTmYyWWg0dnB4b2NpSGhwYklUXzZzVkFGVDR5NXVGUllWUVM?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "南亞",
-      "company_id": "1303",
-      "title": "塑膠一片慘綠！南亞目標價喊上320元卻重挫半根 「這檔」連4日跌7.05%、勝昱跌停 - Yahoo股市",
-      "date": "2026-09-15",
-      "published_at": "2026-09-15 15:00",
-      "source": "Yahoo股市",
-      "url": "https://news.google.com/rss/articles/CBMi-wJBVV95cUxQMEhuVWNiM3Z4VDJnNWVrVUs3SU03cDhHVGp5ZFFOS2VMQ21hdWlxN09DcFlmc3BLTjhwbFl0X0VOQkowUlBWM3dBeE9SNVRVYklsU095ZEJFSnlESjZlTXBCTW5yd3BOZmtlMUt1emRHRjRoUW1UUVd1UlpNQWFMeWdYRGVxRERyLXg1WmphaTQ4akh4ZU5GTlNoNEllNUxTVmloVjVGQW1YNHhlbDc4YWxHZzIwLWFlWTd2QXBsR0FTN2F5NjZlbUs1bllsNVJGYzZFbTA2MGNJeVZqSDJVYWNfaW1Fb0UtbTBRT0h5Zmg1UkhhWGdMQ1VvVndNdmI4cFhWc0pYTE9aWGxYV1pzZl9EUFJZYmZwYUo3ZDRsR3NFTWZWYzlWR0VrNUljdzhUQXhGd2JMelZicmo0RGFmOXdWLWZ0V2NkQmdaWFJqcEc3NlRsUVEycW1XSTVyWHNnbmV2dEVVREY1ei15ampaV2UybTRkZC0yQWlv?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "政美應用",
-      "company_id": "7853",
-      "title": "7853 政美應用- 爆大量！ - 股市爆料同學會 - CMoney",
-      "date": "2026-09-14",
-      "published_at": "2026-09-14 15:00",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE13a0xDX0RSdERrcGg5dnVaZVlGdFp1WUx3V0UtUWRvekNGQ1U3TVZZdDRIcklOS2l0Y1MtSi0wOWdFbng2dkpjQ3NLdkRPUllNcmhqY3FuaG8?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "政美應用",
-      "company_id": "7853",
-      "title": "7853 政美應用- 回測這支最大量的週K - 股市爆料同學會 - CMoney",
-      "date": "2026-09-12",
-      "published_at": "2026-09-12 15:00",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1hbGxWWUdwenRKUEVYQUpvZFVaT21GVnF5RVl1Z3l6TGtlTTAxSkVkNWl6bDRDTGVTQ3VuckVCaE9RODl5T1VpbGI1Y1FTaDZVajF3bDZWYUw?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "【12:32 即時新聞】由田(3455)股價小幅走高，受惠營收回溫與AI PCB裝置題材＋短線跌深反彈但上方仍有籌碼壓力 - CMoney",
-      "date": "2026-09-11",
-      "published_at": "2026-09-11 15:00",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5Wa08xUzJ5SFMtYUlMZXotclZvMGQyVHhSM2F3a2FwNWNqSGtLLUdWSVRfZGVfZzVjUy1VSkRPNTNBSzNFWkNXQUxId3ZYbjlqakpaS2pOcHNCWVpJLVhSQ004MWk2SlE?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "政美應用",
-      "company_id": "7853",
       "title": "7853 政美應用- 股市最新爆料，掌握股友們對眾個股股價、技術分析、新聞的第一手... - 股市爆料同學會 - CMoney",
       "date": "2026-08-10",
       "published_at": "2026-08-10 15:00",
@@ -2606,26 +2476,6 @@
     {
       "company": "政美應用",
       "company_id": "7853",
-      "title": "7853 政美應用- 有關CoPoＳ供應鏈不能公布的名單- 股市爆料同學會 - CMoney",
-      "date": "2026-06-16",
-      "published_at": "2026-06-16 15:00",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE11Yk5sUzBxenhzMUtvT1RvcjBJVkhELUxDTGpvb0hfX0RtZmZtR0Nod3h6V3p1a2puS1RXNTBGRXBEazFvVXhERFNXTHBaVWpNVVBRcUFTQk0?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "政美應用",
-      "company_id": "7853",
-      "title": "7853 政美應用- 阿美，差不多可以開始佈局了- 股市爆料同學會 - CMoney",
-      "date": "2026-05-27",
-      "published_at": "2026-05-27 15:00",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBnYnhBWG9BRmNmZkI0cHNybVRhdndmVWoyZ0pZNUVFdnZ0YVlBUnBpaElNX0doNUFJakNBTTB6NzJ6N0NvanNoM0cwcnloNFdtUExmUHU3bjI?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "政美應用",
-      "company_id": "7853",
       "title": "7853 政美應用- 政美4月營收備註，詳細解讀，有如不同意見，歡迎留言討論。 - 股市爆料同學會 - CMoney",
       "date": "2026-05-08",
       "published_at": "2026-05-08 15:00",
@@ -2644,5 +2494,5 @@
       "confidence": "secondary"
     }
   ],
-  "news_updated_at": "2026-10-01 21:19"
+  "news_updated_at": "2026-10-01 21:50"
 }
