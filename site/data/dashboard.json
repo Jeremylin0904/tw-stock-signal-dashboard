@@ -2496,20 +2496,20 @@
     {
       "company": "由田",
       "company_id": "3455",
-      "title": "討論牆 | 盤中速報 - 由田(3455)大漲7.09%，報272元 - today.line.me",
+      "title": "討論牆 | 盤中速報 - 由田(3455)大漲7.09%，報272元 - LINE TODAY",
       "date": "2026-09-26",
       "published_at": "2026-09-26 21:14",
-      "source": "today.line.me",
+      "source": "LINE TODAY",
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE93TERRb1kwOVFhUGdQWVZTVC0ybVp3TVB0RWVibjdlaTczN1pMX2YxaHdySzhZLTFJMFNqV21laDNJVzVxSjBXalROOWE3RWl4Y3Z6UVc1M3RpZEZFQm53UVNwa2g?oc=5",
       "confidence": "secondary"
     },
     {
       "company": "由田",
       "company_id": "3455",
-      "title": "討論牆 | 盤中速報 - 由田(3455)急拉3.72%報265.0元，成交961張 - today.line.me",
+      "title": "討論牆 | 盤中速報 - 由田(3455)急拉3.72%報265.0元，成交961張 - LINE TODAY",
       "date": "2026-09-26",
       "published_at": "2026-09-26 14:25",
-      "source": "today.line.me",
+      "source": "LINE TODAY",
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBuWVg1OVd5OGhCSWxJS0pXTkRITHl1RVU3WTNtWDhMa0lBbmY3UjRSYjB3cEw3SS1sWkxVZHZmWHliSDd0Z0QwOVdJRDF1WjJ4cmtfN2FUU3FHNDQ0c254WlRSZGY?oc=5",
       "confidence": "secondary"
     },
@@ -2674,5 +2674,5 @@
       "confidence": "secondary"
     }
   ],
-  "news_updated_at": "2026-10-03 13:21"
+  "news_updated_at": "2026-10-03 18:39"
 }
