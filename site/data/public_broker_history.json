@@ -180,6 +180,21 @@
       "cr15_latest": 0.33,
       "cr15_avg": 0.35,
       "branches_count": 511
+    },
+    {
+      "observed_at": "2026-10-15 03:18",
+      "source_date": "2026-10-14",
+      "stock_id": "7853",
+      "window_days": 5,
+      "net": null,
+      "rank": null,
+      "share_pct": null,
+      "long_window_days": 16,
+      "long_net": null,
+      "long_rank": null,
+      "cr15_latest": 0.47,
+      "cr15_avg": 0.38,
+      "branches_count": 482
     }
   ]
 }
