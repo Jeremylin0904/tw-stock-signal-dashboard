@@ -2,6 +2,21 @@
   "source": "Signova public stock pages (summary only)",
   "snapshots": [
     {
+      "observed_at": "2026-10-21 03:10",
+      "source_date": null,
+      "stock_id": "7853",
+      "window_days": null,
+      "net": null,
+      "rank": null,
+      "share_pct": null,
+      "long_window_days": null,
+      "long_net": null,
+      "long_rank": null,
+      "cr15_latest": null,
+      "cr15_avg": null,
+      "branches_count": null
+    },
+    {
       "observed_at": "2026-09-24 16:08",
       "source_date": "2026-09-23",
       "stock_id": "7853",
