@@ -2346,16 +2346,6 @@
   },
   "news": [
     {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "飆股幕後》檢測設備獲主力青睞 由田連5天拉出漲停 - 自由時報",
-      "date": "2026-10-24",
-      "published_at": "2026-10-24 15:56",
-      "source": "自由時報",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1VWVc5VTFBdHQtdFdYc09oMjFPVlNCdUZNT1d2c1pJd2JMVmhkX1BSN3FoR2l6XzRxVjdXbnh4UUxnSVNwcnNQR2NLNjBPMmw0VDdjbEdJRDg?oc=5",
-      "confidence": "secondary"
-    },
-    {
       "company": "南亞",
       "company_id": "1303",
       "title": "南亞單月賺4.42元也擋不住賣壓！玻纖布、CCL醞釀漲價，PCB股卻先跳水 - 聚財網",
@@ -2438,6 +2428,16 @@
     {
       "company": "南亞",
       "company_id": "1303",
+      "title": "盤中謠言滿天飛！南亞澄清與「南亞新材料」無關 - 自由財經",
+      "date": "2026-10-22",
+      "published_at": "2026-10-22 14:49",
+      "source": "自由財經",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE4zcUdMR2I1QURhNTZVaE9fbWJQclRKUjBrWjlRb0FyVUtxajRSTWhMcTdMVThnUUpvVmE1NlJWbWlYSk1nWWlLZnpVV2ZScEZrRnVZT2Z0TzBURGVYdzVz0gFkQVVfeXFMUHBuWV9JX1Nab1RneHRpckE2NGlVMlJ2TlZjS0dEeV9tNEhqU3o0VUZqa3Ywb1gtaWlleDZUd3J0Wm93bXpMVThQa19wU201OVdoUVM1TzZ3WmNqbWd5SGtMQTMxQg?oc=5",
+      "confidence": "secondary"
+    },
+    {
+      "company": "南亞",
+      "company_id": "1303",
       "title": "南亞90天狂飆231%！「這光學大廠」6天週轉率破161%、台郡爆量11倍 12檔注意股一次看 - Yahoo股市",
       "date": "2026-10-22",
       "published_at": "2026-10-22 08:34",
@@ -2466,13 +2466,43 @@
       "confidence": "secondary"
     },
     {
-      "company": "南亞",
-      "company_id": "1303",
-      "title": "〈焦點股〉CCL報價漲、外資調高目標價 南亞盤中奔漲停 - 鉅亨網",
-      "date": "2026-10-21",
-      "published_at": "2026-10-21 13:21",
-      "source": "鉅亨網",
-      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBsZ284SXNTVEpaNEdEY1hKZ2dKLXl3eEstd0JadlFOT2JyMnBlb29XcWh2Y1k2dW9BN3g5TlhxUktZai11bHZ6RDlVOERKSDQ?oc=5",
+      "company": "由田",
+      "company_id": "3455",
+      "title": "盈餘：由田(3455)股價遭警示，自結9月歸屬母公司淨利4100萬元，EPS 0.69元 - 富聯網",
+      "date": "2026-10-20",
+      "published_at": "2026-10-20 07:00",
+      "source": "富聯網",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOT0xTelppMnd1djVvbkgtTzdYM3F1TWFIN0dESXVuaG1NYWJ4Q3k4TndndHRLRVI1SHludDNJM1FNVjdrWDRNaVk4N1ZQTUZ5eUJVcUJrRW05dzgteFFpd1NZclJfb0ppa19Fa0t6VkRfREQ0N0paOEtOQjhhU3RRQnRtWHVDT29w?oc=5",
+      "confidence": "secondary"
+    },
+    {
+      "company": "由田",
+      "company_id": "3455",
+      "title": "【12:07 即時新聞】由田(3455)盤中走強，AI帶動AOI設備需求受關注 - CMoney投資網誌",
+      "date": "2026-10-16",
+      "published_at": "2026-10-16 12:07",
+      "source": "CMoney投資網誌",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPeE5peGJYYzFTaWhkLVd2S0dyMVlXNEIzU0VFbDdxcmJkekFSbHVEU0UtczA4NlA2bXgtSXNRYWxNb3JyTDRSTUlDODMxS2JtUXBwQkxMMjRPdVg4ZHdETWlIcEdrMTVOOElja0YzOTBvTGU3dFNMWUEzcS1sZ0RiRU5xVlo4RXVHTm5jeFV3?oc=5",
+      "confidence": "secondary"
+    },
+    {
+      "company": "由田",
+      "company_id": "3455",
+      "title": "由田(3455)淨值比查詢｜PB值與河流圖分析合理價位 - 股市爆料同學會 - CMoney",
+      "date": "2026-10-13",
+      "published_at": "2026-10-13 15:00",
+      "source": "CMoney",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9KdklPU0xjQXJFMm83bjBxWXJPQzVsUHA4TVFUNk9veVdGQWpVa2hhLUZibFlpUUFoUWhVbExPZ0dJTzAzUUJ0aEFTelZtR2NjRWxSZmJn?oc=5",
+      "confidence": "secondary"
+    },
+    {
+      "company": "由田",
+      "company_id": "3455",
+      "title": "由田(3455)本益比查詢｜PE估值與河流圖合理區間解析 - 股市爆料同學會 - CMoney",
+      "date": "2026-10-13",
+      "published_at": "2026-10-13 15:00",
+      "source": "CMoney",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5jLUVNRUlnTTFhVVBhZ1FzRmdFdWdqbXRWbGVXazlIamxVWHhLekRqVGNrUFRtVnZSUk0tLUlLX1lSZXFhN1ZXNnJKM1pIWlhKVFBhTk13?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2546,16 +2576,6 @@
       "confidence": "secondary"
     },
     {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "【09:49 即時新聞】由田(3455)股價走強，AI帶動AOI設備成盤中焦點 - CMoney投資網誌",
-      "date": "2026-09-24",
-      "published_at": "2026-09-24 15:00",
-      "source": "CMoney投資網誌",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNaTJ1Z1VfRm5TSGtUOVhIcHJUbkRfU2VJSGhZaXdhVHQ3dDg5cHJGczVwXzFLbTRmQW9ZUjBJVEhHbW9LRXZ4dEx3S2JoM2plSlU5LUptQlczdEQxUWk4ekJsUnJ5bnVPWHNPRE1yTE04RTZoTm9IcFk5YnBZeFBzWjZoYzZTSTVkM29DSzBB?oc=5",
-      "confidence": "secondary"
-    },
-    {
       "company": "政美應用",
       "company_id": "7853",
       "title": "7853 政美應用- 相信大家都喜歡正妹- 股市爆料同學會 - CMoney",
@@ -2578,16 +2598,6 @@
     {
       "company": "由田",
       "company_id": "3455",
-      "title": "【12:42 即時新聞】由田(3455)股價走強，受惠PCB載板裝置與AOI檢測需求題材＋高檔多頭排列支撐偏多格局 - CMoney投資網誌",
-      "date": "2026-08-27",
-      "published_at": "2026-08-27 15:00",
-      "source": "CMoney投資網誌",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxObUFzUEFDQnA3T0VOOHFEVHNsT1AxNnpLSFFMVHdSMUZzQ2t1ZmNiR1BBVERGWlFGWEVHVG03UVdVSm84M1ZudVQ1LUxCaWNTSEQ5a2l0YnlpZmhXMkdaTFB2ZGF2Y19QUFRVdWlQLVpyN19iWEJ6dVZHcHpGQkFpNl9Bd3JLaXROWHdoWkhR?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
       "title": "高階載板、半導體雙引擎由田下半年拚優上半年- 新聞 - MoneyDJ理財網",
       "date": "2026-08-12",
       "published_at": "2026-08-12 15:00",
@@ -2603,16 +2613,6 @@
       "published_at": "2026-07-06 15:00",
       "source": "CMoney",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBkV19TREN1MWwtZjFtM2x3NEEwSDAxNmtfVGhobmNQOF9iSFQzN0JxWk9HMmFQbmlIc1lVY3NhMnJYU1ZXNTFKSENRcjI2RkEwMnE3cU1nQWo?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "由田",
-      "company_id": "3455",
-      "title": "【13:12 即時新聞】由田(3455)亮燈漲停266元，搭AOI與光電族群強勢題材＋短線急殺後技術面超跌反彈吸引買盤回補 - CMoney投資網誌",
-      "date": "2026-06-22",
-      "published_at": "2026-06-22 15:00",
-      "source": "CMoney投資網誌",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUjFYZzBNUExEeWFBUi1qeDh2VG5qcVg3cjVWT2JDS3BFMzJVNDVfSEtvWVVYbUJZSnpqZ0pFeEV1QnMxMnM4UElUOXhWSG41NFJRajJtaEdMdHRHRHp4eFpNZEl0UHRSNllVel9tOTh6V1YtUXZKVnIyd2VmcUR3MVRsNzdGUTVDeFhBdWhn?oc=5",
       "confidence": "secondary"
     },
     {
@@ -2646,5 +2646,5 @@
       "confidence": "secondary"
     }
   ],
-  "news_updated_at": "2026-10-24 21:20"
+  "news_updated_at": "2026-10-25 01:00"
 }
