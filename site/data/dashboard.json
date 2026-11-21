@@ -2228,6 +2228,16 @@
       "confidence": "secondary"
     },
     {
+      "company": "政美應用",
+      "company_id": "7853",
+      "title": "《興櫃股》興櫃20日五霸王 仁新*、昆桐等出列 - 富聯網",
+      "date": "2026-11-21",
+      "published_at": "2026-11-21 09:09",
+      "source": "富聯網",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOOEFxTXU2aHR3QzBtQWF4NjBKdTRPbFB2S2NJV0xldzJlMnpWdm1yOThyd3ZNbWkwcUtKTFBncWIxVzlyU0c3bWJaSzlTZWNIa1Y0cUpLeW5TVlR3ZkhqVy1XZ2ZKc0N0V1pqVzI5dS1vYS16alBhbDdQczdHVzNOdnlDLUNnUWt0?oc=5",
+      "confidence": "secondary"
+    },
+    {
       "company": "南亞",
       "company_id": "1303",
       "title": "南亞擴建玻纖布五廠，高階CCL鏈結同步拉升 - 台視全球資訊網",
@@ -2462,7 +2472,7 @@
       "company_id": "3455",
       "title": "飆股幕後》檢測設備獲主力青睞 由田連5天拉出漲停 - 自由時報",
       "date": "2026-04-11",
-      "published_at": "2026-04-11 15:00",
+      "published_at": "2026-04-11 05:32",
       "source": "自由時報",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1VWVc5VTFBdHQtdFdYc09oMjFPVlNCdUZNT1d2c1pJd2JMVmhkX1BSN3FoR2l6XzRxVjdXbnh4UUxnSVNwcnNQR2NLNjBPMmw0VDdjbEdJRDg?oc=5",
       "confidence": "secondary"
@@ -2480,16 +2490,6 @@
     {
       "company": "政美應用",
       "company_id": "7853",
-      "title": "7853 政美應用- 營收不如預期- 股市爆料同學會 - CMoney",
-      "date": "2026-01-12",
-      "published_at": "2026-01-12 16:00",
-      "source": "CMoney",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBwNXROb2NObm9aM3JLR0gyMVF2NW9ONEh6SG1Pa1QtM3VleEZON2ZJaVFYd2ZnRGprLUtWUk11eURhd3dEV1VFWnI2QUZBaDlLUHRIRG45TXQ?oc=5",
-      "confidence": "secondary"
-    },
-    {
-      "company": "政美應用",
-      "company_id": "7853",
       "title": "7853政美應用整股現價361.77｜豐雲學堂 2026 年 11 月 14 日 - 永豐金證券",
       "date": "2025-11-29",
       "published_at": "2025-11-29 10:56",
@@ -2498,5 +2498,5 @@
       "confidence": "secondary"
     }
   ],
-  "news_updated_at": "2026-11-21 23:23"
+  "news_updated_at": "2026-11-22 05:12"
 }
